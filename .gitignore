@@ -1,0 +1,37 @@
+# File types #
+##############
+*.pyc
+*.swo
+*.swp
+*.swn
+*.seed
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
+
+# Directories #
+###############
+deployment/credentials
+deployment/hosts
+deployment/files/ssh
+logs/
+data/
+.idea/
+.vagrant/
+
+# Specific files #
+##################
+local_settings.py
+vagrant_ansible_inventory_default
+
+
+# OS generated files #
+######################
+.DS_Store?
+ehthumbs.db
+Icon?
+Thumbs.db
+*~
