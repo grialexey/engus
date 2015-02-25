@@ -18,6 +18,7 @@ INSTALLED_APPS = (
     #'debug_toolbar',
 
     # Local apps, referenced via engus.appname
+    'engus.cards',
 
     'django.contrib.admin',
 )
