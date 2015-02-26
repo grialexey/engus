@@ -1,0 +1,43 @@
+<div class="card">
+    <div class="card__content {% if card.level > 0 %}{% if card.level <= 5 %}m-confidence{{ card.level }}{% else %}m-confidence5{% endif %}{% endif %}">
+        <div class="card__front">
+            {{ card.front }}
+        </div>
+        <div class="card__back">
+            {{ card.back }}
+            {% if card.back_audio %}
+                <audio class="card__back-audio" src="{{ card.back_audio.url }}" preload="auto"></audio>
+                <div class="card__back-play-audio-btn" title="Нажмите пробел">Произнести</div>
+            {% endif %}
+            <div class="card__back-overlay m-active" title="Нажмите пробел">Показать</div>
+        </div>
+    </div>
+
+    <form class="card__confidence" action="" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="card" value="{{ card.pk }}">
+        <div class="card__confidence-title">Впомнили ответ?</div>
+        <div class="card__confidence-list">
+            <button name="confidence" type="submit" value="1" class="card__confidence-button card__confidence-button--c1" title="Нажмите 1 на клавиатуре">
+                <span class="card__confidence-button-number">1</span>
+                <span class="card__confidence-button-name">Не вспомнил</span>
+            </button><!--
+         --><button name="confidence" type="submit" value="2" class="card__confidence-button card__confidence-button--c2" title="Нажмите 2 на клавиатуре">
+                <span class="card__confidence-button-number">2</span>
+                <span class="card__confidence-button-name">Плохо</span>
+            </button><!--
+         --><button name="confidence" type="submit" value="3" class="card__confidence-button card__confidence-button--c3" title="Нажмите 3 на клавиатуре">
+                <span class="card__confidence-button-number">3</span>
+                <span class="card__confidence-button-name">Средне</span>
+            </button><!--
+         --><button name="confidence" type="submit" value="4" class="card__confidence-button card__confidence-button--c4" title="Нажмите 4 на клавиатуре">
+                <span class="card__confidence-button-number">4</span>
+                <span class="card__confidence-button-name">Хорошо</span>
+            </button><!--
+         --><button name="confidence" type="submit" value="5" class="card__confidence-button card__confidence-button--c5" title="Нажмите 5 на клавиатуре">
+                <span class="card__confidence-button-number">5</span>
+                <span class="card__confidence-button-name">Отлично</span>
+            </button>
+        </div>
+    </form>
+</div>

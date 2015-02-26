@@ -1,0 +1,80 @@
+.registration {
+    max-width: 380px;
+    margin: 45px auto;
+    line-height: 1;
+
+    h1 {
+        font-size: 25px;
+    }
+
+    p {
+        margin: 15px 0;
+
+        &.centered {
+            text-align: center;
+        }
+    }
+
+    a {
+        link()
+    }
+
+    form {
+        margin: 20px 0;
+
+        p {
+            margin-top: 0;
+        }
+
+        .errorlist {
+            color: red;
+            margin: 20px 0 5px;
+        }
+
+        .helptext {
+            display: block;
+            color: #999;
+            font-size: 15px;
+
+            b {
+                color: #777;
+                font-weight: bold;
+            }
+        }
+
+        label {
+            display: block;
+            margin: 5px 0;
+            color: #333;
+        }
+
+        input {
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 11px 15px;
+            margin: 5px 0;
+            border: 1px solid rgba(0,150,0,1);
+            border-top-color: rgba(0,150,0,0.6);
+            border-left-color: rgba(0,150,0,0.6);
+            border-bottom-width: 2px;
+            border-right-width: 2px;
+            box-shadow: none;
+            border-radius:0;
+            -webkit-appearance: none;
+        }
+
+        input[type=submit] {
+            margin: 30px 0;
+            font-size: 20px;
+            color: #00aeec;
+            background-color: #fff;
+            border: 1px solid mainColor(1);
+            border-top-color: mainColor(0.6);
+            border-left-color: mainColor(0.6);
+            border-bottom-width: 2px;
+            border-right-width: 2px;
+            cursor: pointer;
+        }
+    }
+}

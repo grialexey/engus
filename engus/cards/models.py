@@ -1,17 +1,85 @@
 # -*- coding: utf-8 -*-
 import datetime
+from django.core.urlresolvers import reverse
 from django.db import models
-from django.db.models import Q
 from django.contrib.auth.models import User
 from django.utils import timezone
 
 
-class Deck(models.Model):
+class Unit(models.Model):
     name = models.CharField(max_length=255)
+    weight = models.BooleanField(default=0)
 
     class Meta:
-        verbose_name = 'Cards deck'
-        verbose_name_plural = 'Cards decks'
+        verbose_name = 'Unit'
+        verbose_name_plural = 'Units'
+        ordering = ['-weight', ]
+
+    def __unicode__(self):
+        return self.name
+
+
+class Deck(models.Model):
+    name = models.CharField(max_length=255)
+    user = models.ForeignKey(User, null=True, blank=True)
+    image = models.ImageField(upload_to='card_image/%Y_%m_%d')
+    unit = models.ForeignKey(Unit, null=True, blank=True)
+    weight = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        verbose_name = 'Deck'
+        verbose_name_plural = 'Decks'
+        ordering = ['-unit__weight', '-weight', ]
+
+    def __unicode__(self):
+        if self.user:
+            return '%s. User: %s' % (self.name, self.user.username)
+        return self.name
+
+    def get_study_url(self):
+        return reverse('cards:deck-study', kwargs={'pk': self.pk, })
+
+    def public_cards_count(self):
+        return self.card_set.filter(learner__isnull=True).count()
+
+    def copy_public_cards_to_user(self, user):
+        for card in self.card_set.filter(learner__isnull=True):
+            new_card = Card()
+            new_card.front = card.front
+            new_card.front_audio = card.front_audio
+            new_card.front_image = card.front_image
+            new_card.front_comment = card.front_comment
+            new_card.back = card.back
+            new_card.back_audio = card.back_audio
+            new_card.back_image = card.back_image
+            new_card.back_comment = card.back_comment
+            new_card.deck = card.deck
+            new_card.learner = user
+            new_card.save()
+
+
+class CardQuerySet(models.QuerySet):
+
+    def to_repeat(self):
+        return self.filter(next_repeat__lt=timezone.now()).order_by('-next_repeat')
+
+    def not_studied(self):
+        return self.filter(next_repeat__isnull=True)
+
+    def learned(self):
+        return self.filter(next_repeat__gt=timezone.now()).order_by('-next_repeat')
+
+    def get_card_to_study(self):
+        try:
+            return self.to_repeat()[:1].get()
+        except Card.DoesNotExist:
+            return self.not_studied()[:1].get()
+
+
+class CardManager(models.Manager):
+
+    def get_queryset(self):
+        return super(CardManager, self).get_queryset().select_related('card')
 
 
 class Card(models.Model):
@@ -23,9 +91,13 @@ class Card(models.Model):
     back_audio = models.FileField(blank=True, upload_to='card_audio/%Y_%m_%d')
     back_image = models.ImageField(blank=True, upload_to='card_image/%Y_%m_%d')
     back_comment = models.TextField(blank=True)
-    deck = models.ForeignKey(Deck, null=True, blank=True)
-    author = models.ForeignKey(User)
+    deck = models.ForeignKey(Deck)
+    learner = models.ForeignKey(User, null=True, blank=True)
+    level = models.PositiveIntegerField(default=0)
+    next_repeat = models.DateTimeField(null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
+
+    objects = CardManager().from_queryset(CardQuerySet)()
 
     class Meta:
         verbose_name = 'Card'
@@ -35,49 +107,15 @@ class Card(models.Model):
     def __unicode__(self):
         return u'#%d. %s – %s' % (self.pk, self.front, self.back)
 
-
-class UserCardQuerySet(models.QuerySet):
-
-    def to_repeat(self):
-        return self.filter(next_repeat__lt=timezone.now())
-
-    def learned(self):
-        return self.filter(next_repeat__gt=timezone.now())
-
-
-class UserCardManager(models.Manager):
-
-    def get_queryset(self):
-        return super(UserCardManager, self).get_queryset().select_related('card')
-
-
-class UserCard(models.Model):
-    card = models.ForeignKey(Card)
-    user = models.ForeignKey(User)
-    level = models.PositiveIntegerField(default=0)
-    next_repeat = models.DateTimeField(default=timezone.now)
-    created = models.DateTimeField(auto_now_add=True, verbose_name=u'Создана')
-
-    objects = UserCardManager().from_queryset(UserCardQuerySet)()
-
-    class Meta:
-        unique_together = ('card', 'user')
-        verbose_name = 'User card'
-        verbose_name_plural = 'User cards'
-        ordering = ['-created', ]
-
     def is_to_repeat(self):
         return self.next_repeat < timezone.now()
 
     def set_next_repeat(self):
-        self.next_repeat = timezone.now() + datetime.timedelta(minutes=1) * (self.level ** 3.14)
+        self.next_repeat = timezone.now() + datetime.timedelta(minutes=self.level ** 4)
 
-    def good(self):
-        if self.is_to_repeat():
-            self.level += 1
-            self.set_next_repeat()
-
-    def bad(self):
-        self.level = 0
+    def update_level(self, confidence):
+        if self.level >= 5 and confidence >= 5:
+            self.level += confidence
+        else:
+            self.level = confidence
         self.set_next_repeat()
-

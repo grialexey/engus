@@ -1,0 +1,117 @@
+.header {
+    background-color: mainColor(1);
+
+    &__wrapper {
+        container()
+        position: relative;
+    }
+
+    &__menu {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        width: 100%;
+        padding: 10px 0;
+        position: relative;
+        color: #fff;
+
+        &-item {
+            flex: 0 0 auto;
+            margin: 5px 15px 5px 0;
+            position: relative;
+            font-size: 18px;
+            line-height: 25px;
+
+            &:last-child {
+                margin-right: 0;
+            }
+
+            &--fill {
+                flex: 1 1 auto;
+                margin: 0;
+            }
+        }
+
+        &-slogan {
+            padding: 7px 10px;
+        }
+
+        &-repeat-count {
+            background-color: #fff;
+            color: mainColor(1);
+            box-sizing: border-box;
+            padding: 0 6px;
+            border-radius: 11px;
+            line-height: 22px;
+            height: 22px;
+            min-width: 22px;
+            text-align: center;
+            display: block;
+            transition: opacity 0.1s;
+            font-size: 15px;
+            position: absolute;
+            right: -10px;
+            top: -11px;
+            text-decoration: none;
+            border: 1px solid #fff;
+
+        }
+
+        &-link--mycards.active + &-repeat-count {
+            border: 1px solid #fff !important;
+            background: linear-gradient(top, #ff4832, #cf0404);
+            color: #fff;
+
+            &:hover {
+                background: linear-gradient(top, #ff6a51, #fc0404);
+            }
+        }
+
+        &-link {
+            display: block;
+            border: 1px solid #fff;
+            text-decoration: none;
+            color: #fff;
+            padding: 7px 10px;
+            transition: background-color 0.1s, opacity 0.1s;
+            cursor: pointer;
+
+            &:hover:not(.active):not(.loading):not(&--logo) {
+                background-color: rgba(0,0,0,0.1);
+            }
+
+            &.active {
+                background-color: #fff;
+                color: mainColor(1);
+            }
+
+            &--logo {
+                font-size: 25px;
+                line-height: 25px;
+                text-decoration: none;
+                color: mainColor(1);
+                background-color: #fff;
+                padding: 7px 15px;
+            }
+
+            &--add {
+                border: 1px solid #fff;
+                font-size: 23px;
+                position: relative;
+                padding-left: 12px
+                padding-right: 12px
+
+                &.active {
+                    background-color: #fff;
+                    color: mainColor(1);
+                }
+
+                &.loading {
+                    opacity: 0.7;
+                    pointer: default;
+                }
+            }
+        }
+    }
+}

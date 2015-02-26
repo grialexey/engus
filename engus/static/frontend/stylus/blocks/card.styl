@@ -1,0 +1,212 @@
+.card {
+
+    &__content {
+        border: 1px solid #999;
+        border-right-width: 3px;
+        border-bottom-width: 3px;
+        padding: 0 20px;
+        box-sizing: border-box;
+        margin-bottom: 39px;
+
+        &.m-confidence1 {
+            border-color: confidence1Color(1);
+        }
+
+        &.m-confidence2 {
+            border-color: confidence2Color(1);
+        }
+
+        &.m-confidence3 {
+            border-color: confidence3Color(1);
+        }
+
+        &.m-confidence4 {
+            border-color: confidence4Color(1);
+        }
+
+        &.m-confidence5 {
+            border-color: confidence5Color(1);
+        }
+    }
+
+    &__front, &__back {
+        display: block;
+        padding: 35px 0;
+        text-align: center;
+    }
+
+    &__front {
+        border-bottom: 1px solid #ddd;
+    }
+
+    &__back {
+        position: relative;
+
+        &-audio {
+            display: none;
+        }
+
+        &-play-audio-btn {
+            position: absolute;
+            bottom: 10px;
+            right: 0;
+            color: #bbb;
+            cursor: pointer;
+            font-size: 0.85rem;
+
+            &:hover {
+                color: linkColor;
+            }
+        }
+
+        &-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #fff;
+            text-align: center;
+            opacity: 1;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            display: none;
+            box-sizing: border-box;
+            color: #bbb;
+            cursor: pointer;
+            transition: color 0.2s;
+
+            &:hover {
+                color: #777;
+            }
+
+            &.m-active {
+                display: flex;
+            }
+
+            &.m-error {
+                color: red;
+                opacity: 1;
+            }
+        }
+    }
+
+    &__confidence {
+        display: none;
+
+        &.m-active {
+
+        }
+
+        &-title {
+            text-align: center;
+            color: #555;
+            margin-bottom: 8px;
+        }
+
+        &-list {
+            display: block;
+        }
+
+        &-button {
+            width: 20%;
+            display: inline-block;
+            background-color: #fff;
+            padding: 15px 3px 12px;
+            box-sizing: border-box;
+            text-align: center;
+            cursor: pointer;
+            outline: none;
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+            border-left: none;
+            border-right: 1px solid #ddd;
+
+            &:last-of-type {
+                border-right: 1px solid #ddd;
+            }
+
+            &:first-of-type {
+                border-left: 1px solid #ddd;
+            }
+
+            &-name {
+                font-size: 0.8rem;
+                display: block;
+            }
+
+            &-number {
+                display: block;
+                font-size: 1.3rem;
+                font-weight: bold;
+                margin-bottom: 0.2rem;
+            }
+
+            &--c1 {
+                color: confidence1Color(1);
+
+                &:hover {
+                    background-color: confidence1Color(0.1);
+                }
+
+                &:active, &.m-active {
+                    background-color: confidence1Color(1);
+                    color: #fff;
+                }
+            }
+
+            &--c2 {
+                color: confidence2Color(1);
+
+                &:hover {
+                    background-color: confidence2Color(0.1);
+                }
+
+                &:active, &.m-active {
+                    background-color: confidence2Color(1);
+                    color: #fff;
+                }
+            }
+
+            &--c3 {
+                color: confidence3Color(1);
+
+                &:hover {
+                    background-color: confidence3Color(0.1);
+                }
+
+                &:active, &.m-active {
+                    background-color: confidence3Color(1);
+                    color: #fff;
+                }
+            }
+
+            &--c4 {
+                color: confidence4Color(1);
+
+                &:hover {
+                    background-color: confidence4Color(0.1);
+                }
+
+                &:active, &.m-active {
+                    background-color: confidence4Color(1);
+                    color: #fff;
+                }
+            }
+
+            &--c5 {
+                color: confidence5Color(1);
+
+                &:hover {
+                    background-color: confidence5Color(0.1);
+                }
+
+                &:active, &.m-active {
+                    background-color: confidence5Color(1);
+                    color: #fff;
+                }
+            }
+        }
+    }
+}

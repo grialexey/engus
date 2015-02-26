@@ -1,12 +1,12 @@
 from django.db import models
 from django.forms import Textarea
 from django.contrib import admin
-from .models import Card, UserCard, Deck
+from .models import Card, Deck
 
 
 class CardAdmin(admin.ModelAdmin):
-    list_display = ('front', 'back', 'author', 'created', )
-    raw_id_fields = ('author', 'deck', )
+    list_display = ('front', 'back', 'created', )
+    raw_id_fields = ('deck', 'learner')
     fieldsets = (
         ('Front', {
             'fields': ('front', 'front_image', 'front_audio', 'front_comment')
@@ -15,7 +15,10 @@ class CardAdmin(admin.ModelAdmin):
             'fields': ('back', 'back_image', 'back_audio', 'back_comment')
         }),
         ('Advanced options', {
-            'fields': ('deck', 'author', )
+            'fields': ('deck', )
+        }),
+        ('Learner', {
+            'fields': ('learner', 'level', 'next_repeat', )
         }),
     )
     formfield_overrides = {
@@ -23,10 +26,9 @@ class CardAdmin(admin.ModelAdmin):
     }
 
 
-class UserCardAdmin(admin.ModelAdmin):
-    raw_id_fields = ('card', 'user', )
+class DeckAdmin(admin.ModelAdmin):
+    pass
 
 
 admin.site.register(Card, CardAdmin)
-admin.site.register(UserCard, UserCardAdmin)
-admin.site.register(Deck)
+admin.site.register(Deck, DeckAdmin)

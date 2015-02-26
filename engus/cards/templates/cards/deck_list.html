@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% load pytils_numeral %}
+
+{% block header_menu_item_decks_class %}active{% endblock %}
+
+{% block content %}
+    <ul class="deck-list">
+        {% load thumbnail %}
+        {% for deck in deck_list %}<li class="deck-list__item">
+            <a class="deck-list__item-link" href="{{ deck.get_study_url }}">
+                {% if deck.image %}
+                    <div class="deck-list__item-image-wrapper">
+                        {% thumbnail deck.image 200x150  quality=80  as thumb %}
+                        <img class="deck-list__item-image" src="{{ thumb.url }}" width="{{ thumb.width }}" height="{{ thumb.height }}">
+                    </div>
+                {% endif %}
+                <h2 class="deck-list__item-title">{{ deck.name }}</h2>
+                {% if deck.all_user_cards_count %}
+                    <div class="deck-list__item-cards-count">Изучено:
+                        <b class="deck-list__item-cards-count-numbers {% if deck.learned_user_cards_count != deck.all_user_cards_count %}m-to-learn{% endif %}">
+                            {{ deck.learned_user_cards_count }} из {{ deck.all_user_cards_count }}
+                        </b>
+                    </div>
+                {% else %}
+                    <div class="deck-list__item-cards-count">{{ deck.public_cards_count }} {{ deck.public_cards_count|choose_plural:"карточка,карточки,карточек" }}</div>
+                {% endif %}
+            </a>
+        </li>{% endfor %}
+    </ul>
+{% endblock %}

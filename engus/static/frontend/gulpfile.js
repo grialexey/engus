@@ -6,7 +6,8 @@ var gulp = require('gulp'),
 var paths = {
     scripts: [
         './bower_components/jquery/dist/jquery.min.js',
-        './scripts/app.js'
+        './js/card.js',
+        './js/app.js'
     ],
     stylus: 'stylus/**'
 };

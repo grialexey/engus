@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">      
-    <title>{% block pagetitle %}{% if page_title %}{{ page_title }}. {% endif %}{% endblock %}Site name</title>
+    <title>{% block pagetitle %}{% if page_title %}{{ page_title }} | {% endif %}{% endblock %}Ингус – английские карточки</title>
     <link rel="shortcut icon" href="{{ STATIC_URL }}img/favicon.ico" type="image/x-icon">
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -11,17 +11,70 @@
     <link rel="stylesheet" href="{{ STATIC_URL }}css/global.css"/>
     {% block extrastyles %}{% endblock %}
 
-    <script type="text/javascript" src="{{ STATIC_URL }}dist/js/global.min.js"></script>
+    {% if debug %}
+        <script type="text/javascript" src="{{ STATIC_URL }}frontend/bower_components/jquery/dist/jquery.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}frontend/js/card.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}frontend/js/app.js"></script>
+    {% else %}
+        <script type="text/javascript" src="{{ STATIC_URL }}js/global.min.js"></script>
+    {% endif %}
     {% block extrascripts %}{% endblock %}
 
     {% block extrahead %}{% endblock %}
 </head>
 <body class="page">
-    {% block content %}
-    {% endblock %}
+    <header class="header">
+        <div class="header__wrapper">
+            <ul class="header__menu">
+                <li class="header__menu-item"><a href="/" class="header__menu-link header__menu-link--logo">Ингус</a></li>
+                <li class="header__menu-item header__menu-slogan">Английские карточки</li>
+                <li class="header__menu-item header__menu-item--fill"></li>
+                {% if user.is_authenticated %}
+                    <li class="header__menu-item">
+                        <a href="{% url 'logout' %}" class="header__menu-link {% block header_menu_item_profile_class %}{% endblock %}">Выйти</a>
+                    </li>
+                {% else %}
+                    <li class="header__menu-item"><a href="{% url "login" %}" class="header__menu-link {% block header_menu_item_login_class %}{% endblock %}">Войти</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </header>
 
-    {% if not debug %}
+    <section class="content">
+        {% block content %}
+        {% endblock %}
+    </section>
+
+    {% if not debug and not user.is_superuser %}
         {% comment %} Analytics {% endcomment %}
+        <!-- Yandex.Metrika counter -->
+        <script type="text/javascript">
+        (function (d, w, c) {
+            (w[c] = w[c] || []).push(function() {
+                try {
+                    w.yaCounter23664607 = new Ya.Metrika({id:23664607,
+                            webvisor:true,
+                            clickmap:true,
+                            trackLinks:true,
+                            accurateTrackBounce:true,
+                            trackHash:true});
+                } catch(e) { }
+            });
+
+            var n = d.getElementsByTagName("script")[0],
+                s = d.createElement("script"),
+                f = function () { n.parentNode.insertBefore(s, n); };
+            s.type = "text/javascript";
+            s.async = true;
+            s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+
+            if (w.opera == "[object Opera]") {
+                d.addEventListener("DOMContentLoaded", f, false);
+            } else { f(); }
+        })(document, window, "yandex_metrika_callbacks");
+        </script>
+        <noscript><div><img src="//mc.yandex.ru/watch/23664607" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+        <!-- /Yandex.Metrika counter -->
     {% endif %}
 </body>
 </html>

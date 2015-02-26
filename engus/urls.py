@@ -1,13 +1,16 @@
 from django.conf import settings
 from django.conf.urls import patterns, include, url
-from django.views.generic.base import TemplateView
 
 from django.contrib import admin
 admin.autodiscover()
+admin.site.site_header = 'Engus administration'
 
 
 urlpatterns = patterns('',
-    url(r'^$', TemplateView.as_view(template_name="home.html")),
+    url(r'^$', 'engus.cards.views.home_view'),
+    url(r'^cards/', include('engus.cards.urls', namespace='cards')),
+    url(r'^accounts/', include('engus.accounts.urls', namespace='accounts')),
+    url(r'^accounts/', include('django.contrib.auth.urls')),
     url(r'^engusadmin/', include(admin.site.urls)),
 )
 

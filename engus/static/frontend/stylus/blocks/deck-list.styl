@@ -1,0 +1,68 @@
+.deck-list {
+    margin-top: 35px;
+
+    &__item {
+        width: 250px;
+        display: inline-block;
+        vertical-align: top;
+        margin-bottom: 55px;
+        border: 1px solid mainColor(1);
+        border-bottom-width: 2px;
+        border-right-width: 2px;
+        border: none;
+
+        &:nth-child(odd) {
+            margin-right: 50px;
+        }
+
+        &-link {
+            box-sizing: border-box;
+            text-align: center;
+            color: #000;
+            text-decoration: none;
+            display: block;
+        }
+
+        &-link:hover &-title {
+            color: red;
+        }
+
+        &-title {
+            font-size: 1.4rem;
+            line-height: 1.2;
+            margin-bottom: 0.2rem;
+            font-weight: bold;
+        }
+
+        &-image-wrapper {
+            width: 200px;
+            height: 150px;
+            position: relative;
+            display: block;
+            margin: 0 auto 30px;
+        }
+
+        &-image {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: auto;
+            max-width: 100%;
+            display: block;
+        }
+
+        &-cards-count {
+            color: #999;
+            font-size: 0.85rem;
+
+            &-numbers {
+                font-weight: bold;
+                color: mainColor(1);
+
+                &.m-to-learn {
+                    color: #080;
+                }
+            }
+        }
+    }
+}

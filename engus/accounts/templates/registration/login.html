@@ -1,0 +1,30 @@
+{% extends "registration/base.html" %}
+
+
+{% block pagetitle %}Вход на сайт. {% endblock %}
+
+
+{% block header_menu_item_login_class %}active{% endblock %}
+
+
+{% block registration_content %}
+    <h1>Вход на сайт</h1>
+    <form method="post" action="">
+        {% csrf_token %}
+        {% if form.errors %}
+            <p class="errorlist">Вы ввели неправильный логин или пароль</p>
+        {% endif %}
+        <p>
+            {{ form.username.label_tag }}
+            {{ form.username }}
+        </p>
+        <p>
+            {{ form.password.label_tag }}
+            {{ form.password }}
+        </p>
+
+        <input type="submit" value="Войти" />
+        <input type="hidden" name="next" value="{{ next }}" />
+        <p class="centered"><a href="{% url 'password_reset' %}">Забыли пароль?</a></p>
+    </form>
+{% endblock %}
