@@ -19,9 +19,13 @@
                 <h3 class="deck-list__item-subtitle">{{ deck.subtitle }}</h3>
                 {% if deck.all_user_cards_count %}
                     <div class="deck-list__item-cards-count">
-                        {{ deck.all_user_cards_count }} {{ deck.all_user_cards_count|choose_plural:"карточка,карточки,карточек" }}
+                        {{ deck.all_user_cards_count }} {{ deck.all_user_cards_count|choose_plural:"карточка,карточки,карточек" }}.
                         <span class="deck-list__item-cards-count-to-repeat {% if deck.all_user_cards_count == deck.learned_user_cards_count %}m-done{% endif %}">
-                            ({{ deck.learned_user_cards_count }} {{ deck.learned_user_cards_count|choose_plural:"изучена,изучены,изучены" }})
+                            {% if deck.all_user_cards_count == deck.learned_user_cards_count %}
+                                Все изучены
+                            {% else %}
+                                {{ deck.learned_user_cards_count }} {{ deck.learned_user_cards_count|choose_plural:"изучена,изучены,изучены" }}
+                            {% endif %}
                         </span>
                     </div>
                 {% else %}

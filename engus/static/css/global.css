@@ -382,9 +382,9 @@ textarea {
 }
 .deck-list__item-subtitle {
   font-size: 1.2rem;
-  margin-top: 0.2rem;
+  margin-top: 0.3rem;
   line-height: 1.2;
-  color: #888;
+  color: #000;
 }
 .deck-list__item-image-wrapper {
   width: 100%;
@@ -402,9 +402,9 @@ textarea {
   display: block;
 }
 .deck-list__item-cards-count {
-  color: #000;
+  color: #777;
   font-size: 0.85rem;
-  margin-top: 0.5rem;
+  margin-top: 0.6rem;
 }
 .deck-list__item-cards-count-numbers {
   font-weight: bold;
@@ -413,13 +413,13 @@ textarea {
 .deck-list__item-cards-count-numbers.m-to-learn {
   color: #080;
 }
-.deck-list__item-cards-count.m-done {
-  color: #080;
-  font-weight: bold;
-}
 .deck-list__item-cards-count-to-repeat {
   color: #00a0f0;
 /*float: right;*/
+}
+.deck-list__item-cards-count-to-repeat.m-done {
+  color: #080;
+  font-weight: bold;
 }
 .deck-study__header {
   margin-bottom: 1rem;
