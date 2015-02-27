@@ -21,7 +21,7 @@ def get_google_tts_audio(modeladmin, request, queryset):
 
 
 class CardAdmin(admin.ModelAdmin):
-    list_display = ('front', 'back', 'learner', 'created', )
+    list_display = ('front', 'back', 'back_audio', 'learner', 'deck', 'created', )
     raw_id_fields = ('deck', 'learner')
     actions = [get_google_tts_audio, ]
     fieldsets = (
@@ -43,8 +43,23 @@ class CardAdmin(admin.ModelAdmin):
     }
 
 
+class CardInline(admin.TabularInline):
+    model = Card
+    raw_id_fields = ('learner', )
+    fields = ('front', 'front_image', 'back', 'learner', )
+    formfield_overrides = {
+        models.TextField: {'widget': Textarea(attrs={'rows': 2, 'cols': 50, })},
+    }
+
+    def get_queryset(self, request):
+        qs = super(CardInline, self).get_queryset(request)
+        return qs.exclude(deck__user__isnull=True, learner__isnull=False)
+
+
 class DeckAdmin(admin.ModelAdmin):
-    pass
+    inlines = [CardInline, ]
+    list_display = ('name', 'user', 'weight', 'created', )
+    raw_id_fields = ('user', 'unit', )
 
 
 admin.site.register(Card, CardAdmin)
