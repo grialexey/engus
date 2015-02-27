@@ -22,7 +22,7 @@ def get_google_tts_audio(modeladmin, request, queryset):
 
 
 class CardAdmin(admin.ModelAdmin):
-    list_display = ('front', 'back', 'back_audio', 'learner', 'deck', 'weight', 'created', )
+    list_display = ('front', 'back', 'back_audio', 'level', 'next_repeat', 'learner', 'deck', 'weight', 'created', )
     ordering = ['-created', ]
     raw_id_fields = ('deck', 'learner')
     actions = [get_google_tts_audio, ]
