@@ -9,8 +9,8 @@ register = template.Library()
 @register.filter(name='wrap_b')
 @stringfilter
 def wrap_b(value, substring):
-    if len(substring) > 0 and re.search(substring, value):
-        value = escape(value)
+    value = escape(value)
+    if len(substring) > 0:
         substring = escape(substring)
         value = mark_safe(value.replace(substring, '<b>%s</b>' % substring))
     return value
