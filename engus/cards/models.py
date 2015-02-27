@@ -115,11 +115,11 @@ class Card(models.Model):
         return self.next_repeat < timezone.now()
 
     def set_next_repeat(self):
-        self.next_repeat = timezone.now() + datetime.timedelta(minutes=self.level ** 4)
+        self.next_repeat = timezone.now() + datetime.timedelta(minutes=self.level ** 3)
 
     def update_level(self, confidence):
         if self.level >= 5 and confidence >= 5:
-            self.level += confidence
+            self.level *= 2
         else:
             self.level = confidence
         self.set_next_repeat()
