@@ -12,16 +12,14 @@
         justify-content: space-between;
         flex-wrap: wrap;
         width: 100%;
-        padding: 10px 0;
+        padding: 0.7rem 0;
         position: relative;
         color: #fff;
 
         &-item {
             flex: 0 0 auto;
-            margin: 5px 15px 5px 0;
+            margin-right: 0.5rem;
             position: relative;
-            font-size: 18px;
-            line-height: 25px;
 
             &:last-child {
                 margin-right: 0;
@@ -31,49 +29,27 @@
                 flex: 1 1 auto;
                 margin: 0;
             }
+
         }
 
         &-slogan {
-            padding: 7px 10px;
-        }
+            padding: 0.4rem 0.7rem;
+            font-size: 1.1rem;
+            line-height: 1.5rem;
 
-        &-repeat-count {
-            background-color: #fff;
-            color: mainColor(1);
-            box-sizing: border-box;
-            padding: 0 6px;
-            border-radius: 11px;
-            line-height: 22px;
-            height: 22px;
-            min-width: 22px;
-            text-align: center;
-            display: block;
-            transition: opacity 0.1s;
-            font-size: 15px;
-            position: absolute;
-            right: -10px;
-            top: -11px;
-            text-decoration: none;
-            border: 1px solid #fff;
-
-        }
-
-        &-link--mycards.active + &-repeat-count {
-            border: 1px solid #fff !important;
-            background: linear-gradient(top, #ff4832, #cf0404);
-            color: #fff;
-
-            &:hover {
-                background: linear-gradient(top, #ff6a51, #fc0404);
+            @media(max-width: 500px) {
+                display: none;
             }
         }
 
         &-link {
             display: block;
+            font-size: 1.1rem;
+            line-height: 1.5rem;
             border: 1px solid #fff;
             text-decoration: none;
             color: #fff;
-            padding: 7px 10px;
+            padding: 0.4rem 0.7rem;
             transition: background-color 0.1s, opacity 0.1s;
             cursor: pointer;
 
@@ -87,30 +63,12 @@
             }
 
             &--logo {
-                font-size: 25px;
-                line-height: 25px;
+                font-size: 1.5rem;
+                line-height: 1.5rem;
                 text-decoration: none;
                 color: mainColor(1);
                 background-color: #fff;
-                padding: 7px 15px;
-            }
-
-            &--add {
-                border: 1px solid #fff;
-                font-size: 23px;
-                position: relative;
-                padding-left: 12px
-                padding-right: 12px
-
-                &.active {
-                    background-color: #fff;
-                    color: mainColor(1);
-                }
-
-                &.loading {
-                    opacity: 0.7;
-                    pointer: default;
-                }
+                padding: 0.4rem 0.7rem;
             }
         }
     }
