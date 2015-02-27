@@ -97,6 +97,7 @@ class Card(models.Model):
     learner = models.ForeignKey(User, null=True, blank=True)
     level = models.PositiveIntegerField(default=0)
     next_repeat = models.DateTimeField(null=True, blank=True)
+    weight = models.IntegerField(default=0)
     created = models.DateTimeField(auto_now_add=True)
 
     objects = CardManager().from_queryset(CardQuerySet)()
@@ -104,7 +105,7 @@ class Card(models.Model):
     class Meta:
         verbose_name = 'Card'
         verbose_name_plural = 'Cards'
-        ordering = ['-created', ]
+        ordering = ['-weight', '-created', ]
 
     def __unicode__(self):
         return u'#%d. %s – %s' % (self.pk, self.front, self.back)
