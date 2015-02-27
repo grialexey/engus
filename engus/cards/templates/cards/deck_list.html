@@ -18,12 +18,11 @@
                 <h2 class="deck-list__item-title">{{ deck.name }}</h2>
                 <h3 class="deck-list__item-subtitle">{{ deck.subtitle }}</h3>
                 {% if deck.all_user_cards_count %}
-                    <div class="deck-list__item-cards-count {% if deck.all_user_cards_count == deck.learned_user_cards_count %}m-done{% endif %}">
-                        {% if deck.all_user_cards_count == deck.learned_user_cards_count %}
-                            {{ deck.all_user_cards_count }} {{ deck.all_user_cards_count|choose_plural:"карточка,карточки,карточек" }}
-                        {% else %}
-                            <div class="deck-list__item-cards-count-to-repeat">{{ deck.learned_user_cards_count }} из {{ deck.all_user_cards_count }} повторить</div>
-                        {% endif %}
+                    <div class="deck-list__item-cards-count">
+                        {{ deck.all_user_cards_count }} {{ deck.all_user_cards_count|choose_plural:"карточка,карточки,карточек" }}
+                        <span class="deck-list__item-cards-count-to-repeat {% if deck.all_user_cards_count == deck.learned_user_cards_count %}m-done{% endif %}">
+                            ({{ deck.learned_user_cards_count }} {{ deck.learned_user_cards_count|choose_plural:"изучена,изучены,изучены" }})
+                        </span>
                     </div>
                 {% else %}
                     <div class="deck-list__item-cards-count">

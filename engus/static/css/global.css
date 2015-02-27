@@ -402,7 +402,7 @@ textarea {
   display: block;
 }
 .deck-list__item-cards-count {
-  color: #999;
+  color: #000;
   font-size: 0.85rem;
   margin-top: 0.5rem;
 }
@@ -419,6 +419,7 @@ textarea {
 }
 .deck-list__item-cards-count-to-repeat {
   color: #00a0f0;
+/*float: right;*/
 }
 .deck-study__header {
   margin-bottom: 1rem;
