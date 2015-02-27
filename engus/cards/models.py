@@ -50,13 +50,13 @@ class Deck(models.Model):
 class CardQuerySet(models.QuerySet):
 
     def to_repeat(self):
-        return self.filter(next_repeat__lt=timezone.now()).order_by('-next_repeat')
+        return self.filter(next_repeat__lt=timezone.now()).order_by('next_repeat')
 
     def not_studied(self):
         return self.filter(next_repeat__isnull=True)
 
     def learned(self):
-        return self.filter(next_repeat__gt=timezone.now()).order_by('-next_repeat')
+        return self.filter(next_repeat__gt=timezone.now())
 
     def public(self):
         return self.filter(learner__isnull=True)
