@@ -27,9 +27,15 @@ ADMINS = (
 MANAGERS = ADMINS
 
 
-EMAIL_HOST_USER = '{{ project_name }}'
-DEFAULT_FROM_EMAIL = "{{ project_name }}@{{ server_hostname }}"
-SERVER_EMAIL = "{{ project_name }}@{{ server_hostname }}"
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 587
+
+EMAIL_HOST_USER = '{{ lookup('file', 'credentials/' + nickname + '/mail_account') }}'
+EMAIL_HOST_PASSWORD = '{{ lookup('file', 'credentials/' + nickname + '/mail_password') }}'
+DEFAULT_FROM_EMAIL = '{{ lookup('file', 'credentials/' + nickname + '/mail_account') }}'
+SERVER_EMAIL = '{{ lookup('file', 'credentials/' + nickname + '/mail_account') }}'
 
 
 CACHES = {
