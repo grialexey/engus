@@ -408,6 +408,13 @@ textarea {
 .deck-list__item-cards-count-numbers.m-to-learn {
   color: #080;
 }
+.deck-list__item-cards-count.m-done {
+  color: #080;
+  font-weight: bold;
+}
+.deck-list__item-cards-count-to-repeat {
+  color: #00a0f0;
+}
 .deck-study__header {
   margin-bottom: 1rem;
   display: -webkit-box;

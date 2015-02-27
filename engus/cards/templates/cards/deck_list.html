@@ -18,13 +18,17 @@
                 <h2 class="deck-list__item-title">{{ deck.name }}</h2>
                 <h3 class="deck-list__item-subtitle">{{ deck.subtitle }}</h3>
                 {% if deck.all_user_cards_count %}
-                    <div class="deck-list__item-cards-count">Изучено:
-                        <b class="deck-list__item-cards-count-numbers {% if deck.learned_user_cards_count != deck.all_user_cards_count %}m-to-learn{% endif %}">
-                            {{ deck.learned_user_cards_count }} из {{ deck.all_user_cards_count }}
-                        </b>
+                    <div class="deck-list__item-cards-count {% if deck.all_user_cards_count == deck.learned_user_cards_count %}m-done{% endif %}">
+                        {% if deck.all_user_cards_count == deck.learned_user_cards_count %}
+                            {{ deck.all_user_cards_count }} {{ deck.all_user_cards_count|choose_plural:"карточка,карточки,карточек" }}
+                        {% else %}
+                            <div class="deck-list__item-cards-count-to-repeat">{{ deck.learned_user_cards_count }} из {{ deck.all_user_cards_count }} повторить</div>
+                        {% endif %}
                     </div>
                 {% else %}
-                    <div class="deck-list__item-cards-count">{{ deck.public_cards_count }} {{ deck.public_cards_count|choose_plural:"карточка,карточки,карточек" }}</div>
+                    <div class="deck-list__item-cards-count">
+                        {{ deck.card_set.public.count }} {{ deck.card_set.public.count|choose_plural:"карточка,карточки,карточек" }}
+                    </div>
                 {% endif %}
             </a>
         </li>{% endfor %}

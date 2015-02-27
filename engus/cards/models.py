@@ -42,9 +42,6 @@ class Deck(models.Model):
     def get_study_url(self):
         return reverse('cards:deck-study', kwargs={'pk': self.pk, })
 
-    def public_cards_count(self):
-        return self.card_set.filter(learner__isnull=True).count()
-
     def copy_public_cards_to_user(self, user):
         for card in self.card_set.filter(learner__isnull=True):
             new_card = Card()
@@ -71,6 +68,9 @@ class CardQuerySet(models.QuerySet):
 
     def learned(self):
         return self.filter(next_repeat__gt=timezone.now()).order_by('-next_repeat')
+
+    def public(self):
+        return self.filter(learner__isnull=True)
 
     def get_card_to_study(self):
         try:
