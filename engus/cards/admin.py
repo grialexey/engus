@@ -17,7 +17,7 @@ def get_google_tts_audio(modeladmin, request, queryset):
             temp.write(response.read())
             temp.flush()
             translified = translify(text)
-            file_name = slugify(translified)[:90]
+            file_name = slugify(translified)[:50]
             card.back_audio.save('%s.mp3' % file_name, File(temp))
 
 
