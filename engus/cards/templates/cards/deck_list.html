@@ -11,13 +11,13 @@
             <a class="deck-list__item-link" href="{{ deck.get_study_url }}">
                 {% if deck.image %}
                     <div class="deck-list__item-image-wrapper">
-                        {% thumbnail deck.image 300x300  quality=80  as thumb %}
+                        {% thumbnail deck.image 150x100  quality=80  as thumb %}
                         <img class="deck-list__item-image" src="{{ thumb.url }}" width="{{ thumb.width }}" height="{{ thumb.height }}">
                     </div>
                 {% endif %}
                 <h2 class="deck-list__item-title">{{ deck.name }}</h2>
                 {% if deck.all_user_cards_count %}
-                    <div class="deck-list__item-cards-count">
+                    <div class="deck-list__item-cards-count {% if deck.learned_user_cards_count == deck.all_user_cards_count %}m-done{% else %}m-repeat{% endif %}">
                         {{ deck.learned_user_cards_count }} / {{ deck.all_user_cards_count }}
                     </div>
                 {% else %}

@@ -215,16 +215,11 @@ textarea {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  color: #bbb;
+  color: #00a0f0;
   cursor: pointer;
-  -webkit-transition: color 0.2s;
-  -moz-transition: color 0.2s;
-  -o-transition: color 0.2s;
-  -ms-transition: color 0.2s;
-  transition: color 0.2s;
 }
 .card__back-overlay:hover {
-  color: #777;
+  color: #f00;
 }
 .card__back-overlay.m-active {
   display: -webkit-box;
@@ -354,7 +349,7 @@ textarea {
   width: 150px;
   display: inline-block;
   vertical-align: top;
-  margin: 0 3rem 3rem 0;
+  margin: 0 0.7rem 3rem;
 }
 .deck-list__item-link {
   -webkit-box-sizing: border-box;
@@ -369,7 +364,7 @@ textarea {
   color: #f00;
 }
 .deck-list__item-title {
-  font-size: 1.1rem;
+  font-size: 1rem;
   line-height: 1.2;
   color: #00a0f0;
 }
@@ -381,31 +376,22 @@ textarea {
   margin-bottom: 0.8rem;
 }
 .deck-list__item-image {
-  position: absolute;
-  bottom: 0;
-  left: 0;
   height: auto;
   max-width: 100%;
   display: block;
+  margin: 0 auto;
 }
 .deck-list__item-cards-count {
-  color: #777;
+  color: #bbb;
   font-size: 0.85rem;
-  margin-top: 0.3rem;
+  margin-top: 0.1rem;
 }
-.deck-list__item-cards-count-numbers {
+.deck-list__item-cards-count.m-done {
+  color: #080;
   font-weight: bold;
-  color: #00a0f0;
 }
-.deck-list__item-cards-count-numbers.m-to-learn {
-  color: #080;
-}
-.deck-list__item-cards-count-to-repeat {
-  color: #00a0f0;
-/*float: right;*/
-}
-.deck-list__item-cards-count-to-repeat.m-done {
-  color: #080;
+.deck-list__item-cards-count.m-repeat {
+  color: #f00;
   font-weight: bold;
 }
 .deck-study__header {
