@@ -1,10 +1,11 @@
 <div class="card">
     <div class="card__content {% if card.level > 0 %}{% if card.level <= 5 %}m-confidence{{ card.level }}{% else %}m-confidence5{% endif %}{% endif %}">
         <div class="card__front">
-            {{ card.front|safe }}
+            {% load wrap_b %}
+            {{ card.front|wrap_b:card.front_highlighted_text }}
         </div>
         <div class="card__back">
-            {{ card.back|safe }}
+            {{ card.back|wrap_b:card.back_highlighted_text }}
             {% if card.back_audio %}
                 <audio class="card__back-audio" src="{{ card.back_audio.url }}" preload="auto"></audio>
                 <div class="card__back-play-audio-btn" title="Нажмите пробел">Произнести</div>

@@ -87,10 +87,12 @@ class CardManager(models.Manager):
 
 class Card(models.Model):
     front = models.TextField()
+    front_highlighted_text = models.CharField(max_length=255, blank=True)
     front_audio = models.FileField(blank=True, upload_to='card_audio/%Y_%m_%d')
     front_image = models.ImageField(blank=True, upload_to='card_image/%Y_%m_%d')
     front_comment = models.TextField(blank=True)
     back = models.TextField()
+    back_highlighted_text = models.CharField(max_length=255, blank=True)
     back_audio = models.FileField(blank=True, upload_to='card_audio/%Y_%m_%d')
     back_image = models.ImageField(blank=True, upload_to='card_image/%Y_%m_%d')
     back_comment = models.TextField(blank=True)

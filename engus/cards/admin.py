@@ -28,10 +28,10 @@ class CardAdmin(admin.ModelAdmin):
     actions = [get_google_tts_audio, ]
     fieldsets = (
         ('Front', {
-            'fields': ('front', 'front_image', 'front_audio', 'front_comment')
+            'fields': ('front', 'front_highlighted_text', 'front_image', 'front_audio', 'front_comment')
         }),
         ('Back', {
-            'fields': ('back', 'back_image', 'back_audio', 'back_comment')
+            'fields': ('back', 'back_highlighted_text', 'back_image', 'back_audio', 'back_comment')
         }),
         ('Advanced options', {
             'fields': ('weight', 'deck', )
@@ -48,7 +48,7 @@ class CardAdmin(admin.ModelAdmin):
 class CardInline(admin.TabularInline):
     model = Card
     raw_id_fields = ('learner', )
-    fields = ('front', 'front_image', 'back', 'weight', 'learner', )
+    fields = ('front', 'front_highlighted_text', 'front_image', 'back', 'back_highlighted_text',  'weight', 'learner', )
     formfield_overrides = {
         models.TextField: {'widget': Textarea(attrs={'rows': 2, 'cols': 50, })},
     }

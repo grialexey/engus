@@ -4,7 +4,7 @@
 {% block content %}
     <div class="deck-study__header">
         <h1 class="deck-study__title">{{ deck.name }}</h1>
-        <div class="deck-study__completeness"><b class="deck-study__completeness-numbers">{{ learned_cards_in_deck }} из {{ all_cards_in_deck }}</b></div>
+        <div class="deck-study__completeness">Изучено: <b class="deck-study__completeness-numbers">{{ learned_cards_in_deck }} из {{ all_cards_in_deck }}</b></div>
     </div>
     {% include "cards/card.html" %}
 {% endblock %}
