@@ -43,19 +43,8 @@ class Deck(models.Model):
         return reverse('cards:deck-study', kwargs={'pk': self.pk, })
 
     def copy_public_cards_to_user(self, user):
-        for card in self.card_set.filter(learner__isnull=True):
-            new_card = Card()
-            new_card.front = card.front
-            new_card.front_audio = card.front_audio
-            new_card.front_image = card.front_image
-            new_card.front_comment = card.front_comment
-            new_card.back = card.back
-            new_card.back_audio = card.back_audio
-            new_card.back_image = card.back_image
-            new_card.back_comment = card.back_comment
-            new_card.deck = card.deck
-            new_card.learner = user
-            new_card.save()
+        for card in self.card_set.public():
+            card.make_copy(user)
 
 
 class CardQuerySet(models.QuerySet):
@@ -112,6 +101,15 @@ class Card(models.Model):
 
     def __unicode__(self):
         return u'#%d. %s – %s' % (self.pk, self.front, self.back)
+
+    def make_copy(self, learner):
+        new_card = self
+        new_card.pk = None
+        new_card.next_repeat = None
+        new_card.level = 0
+        new_card.learner = learner
+        new_card.save()
+        return new_card
 
     def is_to_repeat(self):
         return self.next_repeat < timezone.now()
