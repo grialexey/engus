@@ -105,7 +105,7 @@ class Card(models.Model):
     class Meta:
         verbose_name = 'Card'
         verbose_name_plural = 'Cards'
-        ordering = ['weight', '-created', 'pk', ]
+        ordering = ['weight', 'created', 'pk', ]
 
     def __unicode__(self):
         return u'#%d. %s – %s' % (self.pk, self.front, self.back)
