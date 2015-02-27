@@ -1,12 +1,29 @@
+import tempfile
+from django.core.files import File
 from django.db import models
 from django.forms import Textarea
 from django.contrib import admin
+from django.template.defaultfilters import slugify
+from pytils.translit import translify
 from .models import Card, Deck
+from .google_tts import audio_extract
+
+
+def get_google_tts_audio(modeladmin, request, queryset):
+    for card in queryset:
+        with tempfile.NamedTemporaryFile() as temp:
+            response = audio_extract(card.back)
+            temp.write(response.read())
+            temp.flush()
+            translified = translify(card.back)
+            file_name = slugify(translified)
+            card.back_audio.save('%s.mp3' % file_name, File(temp))
 
 
 class CardAdmin(admin.ModelAdmin):
-    list_display = ('front', 'back', 'created', )
+    list_display = ('front', 'back', 'learner', 'created', )
     raw_id_fields = ('deck', 'learner')
+    actions = [get_google_tts_audio, ]
     fieldsets = (
         ('Front', {
             'fields': ('front', 'front_image', 'front_audio', 'front_comment')

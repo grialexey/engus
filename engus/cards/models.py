@@ -9,11 +9,12 @@ from django.utils import timezone
 class Unit(models.Model):
     name = models.CharField(max_length=255)
     weight = models.BooleanField(default=0)
+    created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         verbose_name = 'Unit'
         verbose_name_plural = 'Units'
-        ordering = ['-weight', ]
+        ordering = ['-weight', '-created', ]
 
     def __unicode__(self):
         return self.name
@@ -25,11 +26,12 @@ class Deck(models.Model):
     image = models.ImageField(upload_to='card_image/%Y_%m_%d')
     unit = models.ForeignKey(Unit, null=True, blank=True)
     weight = models.PositiveIntegerField(default=0)
+    created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         verbose_name = 'Deck'
         verbose_name_plural = 'Decks'
-        ordering = ['-unit__weight', '-weight', ]
+        ordering = ['-unit__weight', '-weight', '-created', ]
 
     def __unicode__(self):
         if self.user:
