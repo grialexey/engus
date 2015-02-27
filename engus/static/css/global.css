@@ -159,7 +159,8 @@ textarea {
 }
 .card__front b,
 .card__back b {
-  font-weight: bold;
+  font-weight: normal;
+  border-bottom: 1px solid #ccc;
 }
 .card__front {
   border-bottom: 1px solid #ddd;
@@ -370,10 +371,15 @@ textarea {
   color: #f00;
 }
 .deck-list__item-title {
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   line-height: 1.2;
-  margin-bottom: 0.2rem;
   font-weight: bold;
+}
+.deck-list__item-subtitle {
+  font-size: 1.2rem;
+  margin-top: 0.1rem;
+  line-height: 1.2;
+  color: #555;
 }
 .deck-list__item-image-wrapper {
   width: 200px;
@@ -393,6 +399,7 @@ textarea {
 .deck-list__item-cards-count {
   color: #999;
   font-size: 0.85rem;
+  margin-top: 0.5rem;
 }
 .deck-list__item-cards-count-numbers {
   font-weight: bold;
@@ -403,19 +410,52 @@ textarea {
 }
 .deck-study__header {
   margin-bottom: 1rem;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -o-box-orient: horizontal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: justify;
+  -moz-box-pack: justify;
+  -o-box-pack: justify;
+  -ms-flex-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
 }
 .deck-study__title {
   font-size: 1.2rem;
   font-weight: bold;
   display: inline;
   line-height: 1.2rem;
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -o-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
 }
 .deck-study__completeness {
   line-height: 1.2rem;
   color: #aaa;
   display: inline;
   margin-left: 1rem;
-  float: right;
+  text-align: right;
+  white-space: nowrap;
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -o-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex: 1 0 auto;
+  -ms-flex: 1 0 auto;
+  flex: 1 0 auto;
 }
 .deck-study__completeness-numbers {
   font-weight: bold;

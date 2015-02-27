@@ -22,6 +22,7 @@ class Unit(models.Model):
 
 class Deck(models.Model):
     name = models.CharField(max_length=255)
+    subtitle = models.CharField(max_length=255, blank=True)
     user = models.ForeignKey(User, null=True, blank=True)
     image = models.ImageField(upload_to='card_image/%Y_%m_%d')
     unit = models.ForeignKey(Unit, null=True, blank=True)
