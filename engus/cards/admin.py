@@ -3,7 +3,7 @@ from django.core.files import File
 from django.db import models
 from django.forms import Textarea
 from django.contrib import admin
-from django.template.defaultfilters import slugify
+from django.template.defaultfilters import slugify, striptags
 from pytils.translit import translify
 from .models import Card, Deck
 from .google_tts import audio_extract
@@ -12,10 +12,11 @@ from .google_tts import audio_extract
 def get_google_tts_audio(modeladmin, request, queryset):
     for card in queryset:
         with tempfile.NamedTemporaryFile() as temp:
-            response = audio_extract(card.back)
+            text = striptags(card.back)
+            response = audio_extract(text)
             temp.write(response.read())
             temp.flush()
-            translified = translify(card.back)
+            translified = translify(text)
             file_name = slugify(translified)
             card.back_audio.save('%s.mp3' % file_name, File(temp))
 
