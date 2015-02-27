@@ -18,11 +18,11 @@
                 <h2 class="deck-list__item-title">{{ deck.name }}</h2>
                 {% if deck.all_user_cards_count %}
                     <div class="deck-list__item-cards-count">
-                        {{ deck.learned_user_cards_count }}/{{ deck.all_user_cards_count }}
+                        {{ deck.learned_user_cards_count }} / {{ deck.all_user_cards_count }}
                     </div>
                 {% else %}
                     <div class="deck-list__item-cards-count">
-                        0/{{ deck.card_set.public.count }}
+                        0 / {{ deck.card_set.public.count }}
                     </div>
                 {% endif %}
             </a>
