@@ -2,15 +2,15 @@
 
     &__header {
         margin-bottom: 1rem;
-        /*display: flex;*/
-        /*flex-direction: row;*/
-        /*justify-content: space-between;*/
         text-align: center;
         position: relative;
+
+        @media (max-width: 500px) {
+            margin-bottom: 1rem;
+        }
     }
 
     &__title {
-        /*flex: 1 1 auto;*/
         font-size: 1.2rem;
         font-weight: bold;
         display: inline;
@@ -18,8 +18,6 @@
     }
 
     &__completeness {
-        /*flex: 1 0 auto;*/
-        float: right;
         position: absolute;
         right: 0;
         line-height: 1.2rem;

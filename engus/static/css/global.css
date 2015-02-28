@@ -131,14 +131,16 @@ textarea {
   }
 }
 .card__content {
-/*border: 1px solid #999;*/
-/*border-right-width: 3px;*/
-/*border-bottom-width: 3px;*/
-  padding: 0;
+  padding: 0 1rem;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  margin: 1rem 0 2rem;
+  margin-bottom: 2rem;
+}
+@media (max-width: 500px) {
+  .card__content {
+    margin-bottom: 1rem;
+  }
 }
 .card__content.m-confidence1 {
   border-color: #aa0080;
@@ -169,7 +171,7 @@ textarea {
   border-bottom: 1px solid #ccc;
 }
 .card__front {
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #aaa;
 }
 .card__back {
   position: relative;
@@ -179,9 +181,9 @@ textarea {
 }
 .card__back-play-audio-btn {
   position: absolute;
-  top: 0.7rem;
+  top: 0.5rem;
   right: 0;
-  color: #bbb;
+  color: #aaa;
   cursor: pointer;
   font-size: 0.85rem;
 }
@@ -296,7 +298,6 @@ textarea {
   border-radius: 1.2rem;
   margin: 0 auto;
   background-color: #fff;
-/*padding: 15px 3px 12px;*/
   color: #fff;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -305,17 +306,6 @@ textarea {
   cursor: pointer;
   outline: none;
   border: none;
-/*border-top: 1px solid #ddd;*/
-/*border-bottom: 1px solid #ddd;*/
-/*border-left: none;*/
-/*border-right: 1px solid #ddd;*/
-/*&:last-of-type {*/
-/*border-right: 1px solid #ddd;*/
-/*}*/
-/**/
-/*&:first-of-type {*/
-/*border-left: 1px solid #ddd;*/
-/*}*/
 }
 .card__confidence-button:hover {
   opacity: 0.7;
@@ -337,7 +327,7 @@ textarea {
 .card__confidence-button-number {
   display: block;
   font-size: 1.3rem;
-  font-weight: bold;
+/*font-weight: bold;*/
   margin-bottom: 0.2rem;
 }
 .card__confidence-button--c1 {
@@ -395,8 +385,9 @@ textarea {
   color: #333;
 }
 .deck-list__item-image-wrapper {
-  width: 100%;
+  width: 100px;
   height: 100px;
+  margin: 0 auto;
   position: relative;
   display: block;
   margin-bottom: 0.7rem;
@@ -405,7 +396,6 @@ textarea {
   height: auto;
   max-width: 100%;
   display: block;
-  margin: 0 auto;
 }
 .deck-list__item-cards-count {
   color: #bbb;
@@ -422,22 +412,21 @@ textarea {
 }
 .deck-study__header {
   margin-bottom: 1rem;
-/*display: flex;*/
-/*flex-direction: row;*/
-/*justify-content: space-between;*/
   text-align: center;
   position: relative;
 }
+@media (max-width: 500px) {
+  .deck-study__header {
+    margin-bottom: 1rem;
+  }
+}
 .deck-study__title {
-/*flex: 1 1 auto;*/
   font-size: 1.2rem;
   font-weight: bold;
   display: inline;
   line-height: 1.2rem;
 }
 .deck-study__completeness {
-/*flex: 1 0 auto;*/
-  float: right;
   position: absolute;
   right: 0;
   line-height: 1.2rem;

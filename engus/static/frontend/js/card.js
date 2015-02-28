@@ -26,10 +26,11 @@ Card.prototype.cacheElements = function() {
     this.$playBackAudioBtn = this.$el.find('.card__back-play-audio-btn');
     this.$confidence = this.$el.find('.card__confidence');
     this.$confidenceButtons = this.$el.find('.card__confidence-button');
+    this.$revealAnswerBtn = this.$el.find('.card__reveal-answer-btn');
 };
 
 Card.prototype.bindEvents = function() {
-    this.$backOverlay.on('click', { self: this }, this.backOverlayClickEventHandler);
+    this.$revealAnswerBtn.on('click', { self: this }, this.revealAnswerBtnClickEventHandler);
     this.$playBackAudioBtn.on('click', { self: this }, this.playBackAudioBtnClickEventHandler);
     $(document).on('keydown', { self: this }, this.documentKeyDownEventHandler);
     $(document).on('keyup', { self: this }, this.documentKeyUpEventHandler);
@@ -38,7 +39,7 @@ Card.prototype.bindEvents = function() {
 Card.prototype.unbindEvents = function() {
 };
 
-Card.prototype.backOverlayClickEventHandler = function(event) {
+Card.prototype.revealAnswerBtnClickEventHandler = function(event) {
     var self = event.data.self;
     self.openAnswer();
 };
