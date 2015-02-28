@@ -43,7 +43,7 @@ class Deck(models.Model):
 
 
 class Card(models.Model):
-    front = models.TextField()
+    front = models.TextField(blank=True)
     front_highlighted_text = models.CharField(max_length=255, blank=True)
     front_audio = models.FileField(blank=True, upload_to='card_audio/%Y_%m_%d')
     front_image = models.ImageField(blank=True, upload_to='card_image/%Y_%m_%d')
