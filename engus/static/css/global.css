@@ -142,28 +142,13 @@ textarea {
     margin-bottom: 1rem;
   }
 }
-.card__content.m-confidence1 {
-  border-color: #aa0080;
-}
-.card__content.m-confidence2 {
-  border-color: #ff8a47;
-}
-.card__content.m-confidence3 {
-  border-color: #fd0;
-}
-.card__content.m-confidence4 {
-  border-color: #7fae2e;
-}
-.card__content.m-confidence5 {
-  border-color: #00a0f0;
-}
 .card__front,
 .card__back {
   display: block;
   padding: 2rem 0;
   text-align: center;
   font-size: 1.2rem;
-  line-height: 1.3;
+  line-height: 1.4;
 }
 .card__front b,
 .card__back b {
@@ -252,6 +237,12 @@ textarea {
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
   filter: alpha(opacity=70);
 }
+.card__reveal-answer-btn:active {
+  opacity: 1;
+  -ms-filter: none;
+  filter: none;
+  background-color: #e0e0e0;
+}
 .card__reveal-answer-btn.m-confidence1 {
   background-color: #aa0080;
   color: #fff;
@@ -333,17 +324,37 @@ textarea {
 .card__confidence-button--c1 {
   background-color: #aa0080;
 }
+.card__confidence-button--c1:active,
+.card__confidence-button--c1.m-active {
+  background-color: #8c0062;
+}
 .card__confidence-button--c2 {
   background-color: #ff8a47;
+}
+.card__confidence-button--c2:active,
+.card__confidence-button--c2.m-active {
+  background-color: #e16c29;
 }
 .card__confidence-button--c3 {
   background-color: #fd0;
 }
+.card__confidence-button--c3:active,
+.card__confidence-button--c3.m-active {
+  background-color: #e1bf00;
+}
 .card__confidence-button--c4 {
   background-color: #7fae2e;
 }
+.card__confidence-button--c4:active,
+.card__confidence-button--c4.m-active {
+  background-color: #619006;
+}
 .card__confidence-button--c5 {
   background-color: #00a0f0;
+}
+.card__confidence-button--c5:active,
+.card__confidence-button--c5.m-active {
+  background-color: #0082d2;
 }
 .content {
   display: block;
