@@ -11,7 +11,7 @@
             <a class="deck-list__item-link" href="{{ deck.get_study_url }}">
                 {% if deck.image %}
                     <div class="deck-list__item-image-wrapper">
-                        {% thumbnail deck.image 150x100  quality=80  as thumb %}
+                        {% thumbnail deck.image 100x100  quality=80  as thumb %}
                         <img class="deck-list__item-image" src="{{ thumb.url }}" width="{{ thumb.width }}" height="{{ thumb.height }}">
                     </div>
                 {% endif %}

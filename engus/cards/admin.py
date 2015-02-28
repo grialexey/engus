@@ -49,10 +49,6 @@ class CardInline(admin.TabularInline):
         models.TextField: {'widget': Textarea(attrs={'rows': 2, 'cols': 50, })},
     }
 
-    def get_queryset(self, request):
-        qs = super(CardInline, self).get_queryset(request)
-        return qs.exclude(deck__user__isnull=True, learner__isnull=False)
-
 
 class DeckAdmin(admin.ModelAdmin):
     inlines = [CardInline, ]

@@ -2,28 +2,32 @@
 
     &__header {
         margin-bottom: 1rem;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-
+        /*display: flex;*/
+        /*flex-direction: row;*/
+        /*justify-content: space-between;*/
+        text-align: center;
+        position: relative;
     }
 
     &__title {
+        /*flex: 1 1 auto;*/
         font-size: 1.2rem;
         font-weight: bold;
         display: inline;
         line-height: 1.2rem;
-        flex: 1 1 auto;
     }
 
     &__completeness {
+        /*flex: 1 0 auto;*/
+        float: right;
+        position: absolute;
+        right: 0;
         line-height: 1.2rem;
         color: #aaa;
         display: inline;
         margin-left: 1rem;
         text-align: right;
         white-space: nowrap;
-        flex: 1 0 auto;
 
         &-numbers {
             font-weight: bold;

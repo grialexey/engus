@@ -117,8 +117,8 @@ class CardLearner(models.Model):
         self.next_repeat = timezone.now() + datetime.timedelta(minutes=self.level ** 2)
 
     def update_level(self, confidence):
-        if self.level >= 5 and confidence >= 5:
-            self.level *= 2
-        else:
+        if self.level < 5 and confidence < 5:
             self.level = confidence
+        else:
+            self.level *= 2
         self.set_next_repeat()
