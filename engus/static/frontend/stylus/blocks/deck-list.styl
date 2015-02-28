@@ -1,5 +1,6 @@
 .deck-list {
     margin-top: 2rem;
+    text-align: center;
 
     &__item {
         width: 150px;
@@ -16,13 +17,18 @@
         }
 
         &-link:hover &-title {
-            color: red;
+            /*color: red;*/
+        }
+
+        &-link:hover &-image {
+            opacity: 0.8;
         }
 
         &-title {
             font-size: 1rem;
             line-height: 1.2;
-            color: mainColor(1);
+            color: linkColor;
+            color: #333;
         }
 
         &-image-wrapper {
@@ -30,7 +36,7 @@
             height: 100px;
             position: relative;
             display: block;
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.5rem;
         }
 
         &-image {

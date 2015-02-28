@@ -344,6 +344,7 @@ textarea {
 }
 .deck-list {
   margin-top: 2rem;
+  text-align: center;
 }
 .deck-list__item {
   width: 150px;
@@ -360,20 +361,23 @@ textarea {
   display: block;
   text-align: center;
 }
-.deck-list__item-link:hover .deck-list__item-title {
-  color: #f00;
+.deck-list__item-link:hover .deck-list__item-image {
+  opacity: 0.8;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+  filter: alpha(opacity=80);
 }
 .deck-list__item-title {
   font-size: 1rem;
   line-height: 1.2;
-  color: #00a0f0;
+  color: #0096f0;
+  color: #333;
 }
 .deck-list__item-image-wrapper {
   width: 100%;
   height: 100px;
   position: relative;
   display: block;
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.5rem;
 }
 .deck-list__item-image {
   height: auto;
