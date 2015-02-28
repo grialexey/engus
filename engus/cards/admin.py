@@ -5,7 +5,7 @@ from django.forms import Textarea
 from django.contrib import admin
 from django.template.defaultfilters import slugify, striptags
 from pytils.translit import translify
-from .models import Card, Deck
+from .models import Card, Deck, CardLearner
 from .google_tts import audio_extract
 
 
@@ -22,9 +22,9 @@ def get_google_tts_audio(modeladmin, request, queryset):
 
 
 class CardAdmin(admin.ModelAdmin):
-    list_display = ('front', 'back', 'back_audio', 'level', 'next_repeat', 'learner', 'deck', 'weight', 'created', )
+    list_display = ('front', 'back', 'back_audio', 'deck', 'weight', 'created', )
     ordering = ['-created', ]
-    raw_id_fields = ('deck', 'learner')
+    raw_id_fields = ('deck', )
     actions = [get_google_tts_audio, ]
     fieldsets = (
         ('Front', {
@@ -36,9 +36,6 @@ class CardAdmin(admin.ModelAdmin):
         ('Advanced options', {
             'fields': ('weight', 'deck', )
         }),
-        ('Learner', {
-            'fields': ('learner', 'level', 'next_repeat', )
-        }),
     )
     formfield_overrides = {
         models.TextField: {'widget': Textarea(attrs={'rows': 2, 'cols': 80, })},
@@ -47,8 +44,7 @@ class CardAdmin(admin.ModelAdmin):
 
 class CardInline(admin.TabularInline):
     model = Card
-    raw_id_fields = ('learner', )
-    fields = ('front', 'front_highlighted_text', 'front_image', 'back', 'back_highlighted_text',  'weight', 'learner', )
+    fields = ('front', 'front_highlighted_text', 'front_image', 'back', 'back_highlighted_text',  'weight', )
     formfield_overrides = {
         models.TextField: {'widget': Textarea(attrs={'rows': 2, 'cols': 50, })},
     }
@@ -64,5 +60,12 @@ class DeckAdmin(admin.ModelAdmin):
     raw_id_fields = ('user', 'unit', )
 
 
+class CardLearnerAdmin(admin.ModelAdmin):
+    list_display = ('card', 'learner', 'level', 'next_repeat', 'created', )
+    raw_id_fields = ('learner', )
+    ordering = ('-created', )
+
+
 admin.site.register(Card, CardAdmin)
 admin.site.register(Deck, DeckAdmin)
+admin.site.register(CardLearner, CardLearnerAdmin)

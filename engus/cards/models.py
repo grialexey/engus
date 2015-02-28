@@ -42,37 +42,6 @@ class Deck(models.Model):
     def get_study_url(self):
         return reverse('cards:deck-study', kwargs={'pk': self.pk, })
 
-    def copy_public_cards_to_user(self, user):
-        for card in self.card_set.public():
-            card.make_copy(user)
-
-
-class CardQuerySet(models.QuerySet):
-
-    def to_repeat(self):
-        return self.filter(next_repeat__lt=timezone.now()).order_by('next_repeat')
-
-    def not_studied(self):
-        return self.filter(next_repeat__isnull=True)
-
-    def learned(self):
-        return self.filter(next_repeat__gt=timezone.now())
-
-    def public(self):
-        return self.filter(learner__isnull=True)
-
-    def get_card_to_study(self):
-        try:
-            return self.to_repeat()[:1].get()
-        except Card.DoesNotExist:
-            return self.not_studied()[:1].get()
-
-
-class CardManager(models.Manager):
-
-    def get_queryset(self):
-        return super(CardManager, self).get_queryset().select_related('card')
-
 
 class Card(models.Model):
     front = models.TextField()
@@ -86,13 +55,8 @@ class Card(models.Model):
     back_image = models.ImageField(blank=True, upload_to='card_image/%Y_%m_%d')
     back_comment = models.TextField(blank=True)
     deck = models.ForeignKey(Deck)
-    learner = models.ForeignKey(User, null=True, blank=True)
-    level = models.PositiveIntegerField(default=0)
-    next_repeat = models.DateTimeField(null=True, blank=True)
     weight = models.IntegerField(default=0)
     created = models.DateTimeField(auto_now_add=True)
-
-    objects = CardManager().from_queryset(CardQuerySet)()
 
     class Meta:
         verbose_name = 'Card'
@@ -102,14 +66,49 @@ class Card(models.Model):
     def __unicode__(self):
         return u'#%d. %s – %s' % (self.pk, self.front, self.back)
 
-    def make_copy(self, learner):
-        new_card = self
-        new_card.pk = None
-        new_card.next_repeat = None
-        new_card.level = 0
-        new_card.learner = learner
-        new_card.save()
-        return new_card
+
+class CardLearnerQuerySet(models.QuerySet):
+
+    def to_repeat(self):
+        return self.filter(next_repeat__lt=timezone.now()).order_by('next_repeat')
+
+    def not_studied(self):
+        return self.filter(next_repeat__isnull=True)
+
+    def learned(self):
+        return self.filter(next_repeat__gt=timezone.now())
+
+    def get_next_to_study(self):
+        try:
+            return self.to_repeat()[:1].get()
+        except Card.DoesNotExist:
+            return self.not_studied()[:1].get()
+
+
+class CardLearnerManager(models.Manager):
+
+    def get_queryset(self):
+        return super(CardLearnerManager, self).get_queryset().select_related('card')
+
+
+class CardLearner(models.Model):
+    card = models.ForeignKey(Card)
+    learner = models.ForeignKey(User)
+    level = models.PositiveIntegerField(default=1)
+    next_repeat = models.DateTimeField()
+    created = models.DateTimeField(auto_now_add=True)
+
+    objects = CardLearnerManager().from_queryset(CardLearnerQuerySet)()
+
+    class Meta:
+        unique_together = ('card', 'learner', )
+
+    def __unicode__(self):
+        return u'%s. Learner: %s' % (self.card.back, self.learner.username)
+
+    def save(self, *args, **kwargs):
+        self.set_next_repeat()
+        super(CardLearner, self).save(*args, **kwargs)
 
     def is_to_repeat(self):
         return self.next_repeat < timezone.now()

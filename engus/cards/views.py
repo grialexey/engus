@@ -3,18 +3,16 @@ from django.db.models import Q
 from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from .models import Card, Deck
-from .forms import CardConfidenceForm
+from .models import Card, Deck, CardLearner
+from .forms import CardLearnerConfidenceForm
 
 
 def home_view(request):
     if request.user.is_authenticated():
-        decks = Deck.objects.filter(Q(user=request.user) | Q(user__isnull=True))
+        decks = Deck.objects.filter(Q(user=request.user) | Q(user__isnull=True)).select_related('card_set')
         for deck in decks:
-            user_cards_in_deck = Card.objects.filter(deck=deck, learner=request.user)
-            if user_cards_in_deck.exists():
-                deck.all_user_cards_count = user_cards_in_deck.count()
-                deck.learned_user_cards_count = user_cards_in_deck.learned().count()
+            deck.card_learners = CardLearner.objects.filter(card__deck=deck, learner=request.user)
+            deck.learned_cards_count = deck.card_learners.learned().count()
         return render_to_response('cards/deck_list.html', {'deck_list': decks, },
                                   context_instance=RequestContext(request))
     else:
@@ -23,34 +21,43 @@ def home_view(request):
 
 @login_required
 def study_deck(request, pk):
-    if request.method == 'POST':
-        try:
-            card_to_update = Card.objects.get(pk=request.POST.get('card'), learner=request.user)
-            form = CardConfidenceForm(request.POST, instance=card_to_update)
-            if form.is_valid():
-                form.update_level()
-                form.save()
-        except Card.DoesNotExist:
-            pass
-    deck = get_object_or_404(Deck, pk=pk)
-    cards = Card.objects.filter(deck=deck, learner=request.user)
-    if not cards.exists():
-        deck.copy_public_cards_to_user(request.user)
-        cards = Card.objects.filter(deck=deck, learner=request.user)
+    try:
+        deck = Deck.objects.filter(Q(user=request.user) | Q(user__isnull=True)).get(pk=pk)
+    except Deck.DoesNotExist:
+        raise Http404
+    response_data = {'deck': deck, }
+    cards = Card.objects.filter(deck=deck)
     if cards.exists():
-        try:
-            card = cards.get_card_to_study()
-        except Card.DoesNotExist:
-            return redirect('/')
-        all_cards_in_deck = Card.objects.filter(learner=request.user, deck=deck)
-        learned_cards_in_deck = all_cards_in_deck.learned()
-        response_data = {
-            'card': card,
-            'deck': deck,
-            'learned_cards_in_deck': learned_cards_in_deck.count(),
-            'all_cards_in_deck': all_cards_in_deck.count(),
-        }
-        return render_to_response('cards/deck_study.html', response_data,
-                                  context_instance=RequestContext(request))
+        card_learners = CardLearner.objects.filter(card__in=cards, learner=request.user)
+        if card_learners.exists():
+            response_data['learned_cards_count'] = card_learners.learned().count()
+            try:
+                card_learner = card_learners.get_next_to_study()
+                card = card_learner.card
+                response_data['card_learner'] = card_learner
+            except CardLearner.DoesNotExist:
+                try:
+                    card = cards.exclude(pk__in=card_learners.values_list('card', flat=True))[:1].get()
+                except Card.DoesNotExist:
+                    return redirect('/')
+        else:
+            card = cards[0]
+            response_data['learned_cards_count'] = 0
+        response_data['card'] = card
+        return render_to_response('cards/deck_study.html', response_data, context_instance=RequestContext(request))
+    else:
+        return redirect('/')
+
+
+@login_required
+def confidence_change(request, pk):
+    if request.method == 'POST':
+        card = get_object_or_404(Card, pk=pk)
+        card_learner, created = CardLearner.objects.get_or_create(card=card, learner=request.user)
+        form = CardLearnerConfidenceForm(request.POST, instance=card_learner)
+        if form.is_valid():
+            form.update_level()
+            form.save()
+        return redirect(card.deck.get_study_url())
     else:
         raise Http404

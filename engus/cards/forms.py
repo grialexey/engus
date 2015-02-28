@@ -1,12 +1,12 @@
 from django import forms
-from .models import Card
+from .models import CardLearner
 
 
-class CardConfidenceForm(forms.ModelForm):
+class CardLearnerConfidenceForm(forms.ModelForm):
     confidence = forms.IntegerField(min_value=1, max_value=5)
 
     class Meta:
-        model = Card
+        model = CardLearner
         fields = []
 
     def update_level(self):
