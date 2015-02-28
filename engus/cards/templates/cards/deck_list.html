@@ -9,12 +9,15 @@
         {% load thumbnail %}
         {% for deck in deck_list %}<li class="deck-list__item">
             <a class="deck-list__item-link" href="{{ deck.get_study_url }}">
-                {% if deck.image %}
-                    <div class="deck-list__item-image-wrapper">
+                <div class="deck-list__item-image-wrapper">
+                    {% if deck.image %}
                         {% thumbnail deck.image 200x200  quality=80  as thumb %}
                         <img class="deck-list__item-image" src="{{ thumb.url }}" width="{{ thumb.width }}" height="{{ thumb.height }}">
-                    </div>
-                {% endif %}
+                    {% else %}
+                        <img class="deck-list__item-image" src="{{ STATIC_URL }}images/flat-circle.jpg">
+                    {% endif %}
+                </div>
+
                 <h2 class="deck-list__item-title">{{ deck.name }}</h2>
                 {% with deck_cards_count=deck.card_set.count %}
                 <div class="deck-list__item-cards-count {% if deck.card_learners.exists %}{% if deck.learned_cards_count == deck_cards_count %}m-done{% else %}m-repeat{% endif %}{% endif %}">

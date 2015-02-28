@@ -1,7 +1,7 @@
 import tempfile
 from django.core.files import File
 from django.db import models
-from django.forms import Textarea
+from django.forms import Textarea, TextInput
 from django.contrib import admin
 from django.template.defaultfilters import slugify, striptags
 from pytils.translit import translify
@@ -27,11 +27,11 @@ class CardAdmin(admin.ModelAdmin):
     raw_id_fields = ('deck', )
     actions = [get_google_tts_audio, ]
     fieldsets = (
-        ('Front', {
-            'fields': ('front', 'front_highlighted_text', 'front_image', 'front_audio', 'front_comment')
-        }),
         ('Back', {
             'fields': ('back', 'back_highlighted_text', 'back_image', 'back_audio', 'back_comment')
+        }),
+        ('Front', {
+            'fields': ('front', 'front_highlighted_text', 'front_image', 'front_audio', 'front_comment')
         }),
         ('Advanced options', {
             'fields': ('weight', 'deck', )
@@ -44,9 +44,10 @@ class CardAdmin(admin.ModelAdmin):
 
 class CardInline(admin.TabularInline):
     model = Card
-    fields = ('front', 'front_highlighted_text', 'front_image', 'back', 'back_highlighted_text',  'weight', )
+    fields = ('back', 'back_highlighted_text', 'front', 'front_highlighted_text', 'front_image', 'weight', )
     formfield_overrides = {
         models.TextField: {'widget': Textarea(attrs={'rows': 2, 'cols': 50, })},
+        models.CharField: {'widget': TextInput(attrs={'size': 30, })},
     }
 
 
