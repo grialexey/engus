@@ -4,7 +4,7 @@
 {% block content %}
     <div class="deck-study__header">
         <h1 class="deck-study__title">{{ deck.name }}</h1>
-        <div class="deck-study__completeness">{{ learned_cards_count }} / {{ deck.card_set.count }}</div>
+        <div class="deck-study__completeness">{{ learned_cards_count|add:1 }} / {{ deck.card_set.count }}</div>
     </div>
     {% include "cards/card.html" %}
 {% endblock %}
