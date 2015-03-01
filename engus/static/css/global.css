@@ -418,8 +418,8 @@ textarea {
   font-weight: bold;
 }
 .deck-list__item-cards-count.m-repeat {
-  color: #f00;
-  font-weight: bold;
+  color: #555;
+/*font-weight: bold;*/
 }
 .deck-study__header {
   margin-bottom: 1rem;
