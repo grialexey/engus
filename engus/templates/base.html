@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">      
-    <title>{% block pagetitle %}{% if page_title %}{{ page_title }} | {% endif %}{% endblock %}Ингус – английские карточки</title>
+    <title>{% block pagetitle %}{% if page_title %}{{ page_title }} | {% endif %}{% endblock %}Ингус – изучение английского</title>
     <link rel="shortcut icon" href="{{ STATIC_URL }}img/favicon.ico" type="image/x-icon">
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -27,7 +27,7 @@
         <div class="header__wrapper">
             <ul class="header__menu">
                 <li class="header__menu-item"><a href="/" class="header__menu-link header__menu-link--logo">Ингус</a></li>
-                <li class="header__menu-item header__menu-slogan">Английские карточки</li>
+                <li class="header__menu-item header__menu-slogan">Изучение английского</li>
                 <li class="header__menu-item header__menu-item--fill"></li>
                 {% if user.is_authenticated %}
                     <li class="header__menu-item">
