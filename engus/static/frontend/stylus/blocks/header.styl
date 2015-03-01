@@ -33,9 +33,11 @@
         }
 
         &-slogan {
-            padding: 0.4rem 0.7rem;
+            line-height: 2.5rem;
+            height: 2.5rem;
+            border-radius: 1.25rem;
+            padding: 0 1rem;
             font-size: 1.1rem;
-            line-height: 1.5rem;
 
             @media(max-width: 500px) {
                 display: none;
@@ -45,16 +47,18 @@
         &-link {
             display: block;
             font-size: 1.1rem;
-            line-height: 1.5rem;
-            border: 1px solid #fff;
+            line-height: 2.5rem;
+            height: 2.5rem;
+            border-radius: 1.25rem;
+            padding: 0 1rem;
             text-decoration: none;
             color: #fff;
-            padding: 0.4rem 0.7rem;
             transition: background-color 0.1s, opacity 0.1s;
             cursor: pointer;
+            background-color: rgba(0,0,0,0.1);
 
             &:hover:not(.active):not(.loading):not(&--logo) {
-                background-color: rgba(0,0,0,0.1);
+                background-color: rgba(0,0,0,0.2);
             }
 
             &.active {
@@ -64,11 +68,9 @@
 
             &--logo {
                 font-size: 1.5rem;
-                line-height: 1.5rem;
                 text-decoration: none;
                 color: mainColor(1);
                 background-color: #fff;
-                padding: 0.4rem 0.7rem;
             }
         }
     }
