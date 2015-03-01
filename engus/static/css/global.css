@@ -245,11 +245,11 @@ textarea {
   background-color: #e0e0e0;
 }
 .card__reveal-answer-btn.m-confidence1 {
-  background-color: #aa0080;
+  background-color: #aa006e;
   color: #fff;
 }
 .card__reveal-answer-btn.m-confidence2 {
-  background-color: #ff8a47;
+  background-color: #ff9650;
   color: #fff;
 }
 .card__reveal-answer-btn.m-confidence3 {
@@ -323,18 +323,18 @@ textarea {
   margin-bottom: 0.2rem;
 }
 .card__confidence-button--c1 {
-  background-color: #aa0080;
+  background-color: #aa006e;
 }
 .card__confidence-button--c1:active,
 .card__confidence-button--c1.m-active {
-  background-color: #8c0062;
+  background-color: #8c0050;
 }
 .card__confidence-button--c2 {
-  background-color: #ff8a47;
+  background-color: #ff9650;
 }
 .card__confidence-button--c2:active,
 .card__confidence-button--c2.m-active {
-  background-color: #e16c29;
+  background-color: #e17832;
 }
 .card__confidence-button--c3 {
   background-color: #fd0;
@@ -700,7 +700,7 @@ textarea {
   height: 2.5rem;
   -webkit-border-radius: 1.25rem;
   border-radius: 1.25rem;
-  padding: 0 1rem;
+  padding: 0 1.3rem;
   text-decoration: none;
   color: #fff;
   -webkit-transition: background-color 0.1s, opacity 0.1s;
