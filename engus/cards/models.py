@@ -69,7 +69,7 @@ class Card(models.Model):
 class CardLearnerQuerySet(models.QuerySet):
 
     def to_repeat(self):
-        return self.filter(next_repeat__lt=timezone.now()).order_by('-next_repeat')
+        return self.filter(next_repeat__lt=timezone.now()).order_by('level', '-next_repeat')
 
     def not_studied(self):
         return self.filter(next_repeat__isnull=True)
