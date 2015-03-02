@@ -62,6 +62,13 @@ class Card(models.Model):
         verbose_name_plural = 'Cards'
         ordering = ['weight', 'created', 'pk', ]
 
+    def save(self, *args, **kwargs):
+        if self.pk is None:
+            previous_card = Card.objects.filter(deck=self.deck).last()
+            if previous_card is not None:
+                self.weight = previous_card.weight + 100
+        super(Card, self).save(*args, **kwargs)
+
     def __unicode__(self):
         return u'%s – %s. Deck: %s' % (self.front, self.back, self.deck)
 
