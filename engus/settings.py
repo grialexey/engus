@@ -12,6 +12,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
+    'django.contrib.sites',
 
     # Third-party apps, patches, fixes
     'easy_thumbnails',
@@ -84,6 +85,8 @@ STATIC_URL = '/static/'
 SESSION_ENGINE = "django.contrib.sessions.backends.cached_db"
 
 LOGIN_REDIRECT_URL = '/'
+
+SITE_ID = 1
 
 # Third-party apps settings
 
