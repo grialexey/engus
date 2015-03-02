@@ -41,6 +41,9 @@ class Deck(models.Model):
     def get_study_url(self):
         return reverse('cards:deck-study', kwargs={'pk': self.pk, })
 
+    def get_absolute_url(self):
+        return reverse('cards:deck-detail', kwargs={'pk': self.pk, })
+
 
 class Card(models.Model):
     front = models.TextField(blank=True)
