@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% for card in object.card_set.all %}
+        {% include "cards/card.html" %}
+    {% endfor %}
+{% endblock %}
