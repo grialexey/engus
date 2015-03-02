@@ -49,12 +49,13 @@ class CardInline(admin.TabularInline):
         models.TextField: {'widget': Textarea(attrs={'rows': 2, 'cols': 50, })},
         models.CharField: {'widget': TextInput(attrs={'size': 30, })},
     }
-    extra = 15
+    extra = 5
 
 
 class DeckAdmin(admin.ModelAdmin):
     inlines = [CardInline, ]
     list_display = ('name', 'user', 'weight', 'created', )
+    list_editable = ('weight', )
     raw_id_fields = ('user', 'unit', )
 
 
