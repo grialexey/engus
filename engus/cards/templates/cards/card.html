@@ -2,7 +2,12 @@
     <div class="card__content {% if card_learner %}{% if card_learner.level <= 5 %}m-confidence{{ card_learner.level }}{% else %}m-confidence5{% endif %}{% endif %}">
         <div class="card__front">
             {% load wrap_b %}
+            {% load thumbnail %}
             {{ card.front|wrap_b:card.front_highlighted_text }}
+            {% if card.front_image %}
+                {% thumbnail card.front_image 150x150  quality=80  as thumb %}
+                <img class="card__front-image" src="{{ thumb.url }}" width="{{ thumb.width }}" height="{{ thumb.height }}">
+            {% endif %}
         </div>
         <div class="card__back">
             {{ card.back|wrap_b:card.back_highlighted_text }}

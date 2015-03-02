@@ -159,6 +159,10 @@ textarea {
 .card__front {
   border-bottom: 1px solid #aaa;
 }
+.card__front-image {
+  display: block;
+  margin: 1.3rem auto 0;
+}
 .card__back {
   position: relative;
 }
