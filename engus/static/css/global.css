@@ -734,17 +734,20 @@ textarea {
   margin: 0 auto;
 }
 .registration {
-  max-width: 380px;
-  margin: 45px auto;
+  max-width: 23rem;
+  padding: 0 2rem;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 2rem auto;
   line-height: 1;
 }
 .registration h1 {
   font-size: 1.6rem;
-  text-align: center;
   margin-bottom: 1.5rem;
 }
 .registration p {
-  margin: 15px 0;
+  margin: 1.2rem 0;
 }
 .registration p.centered {
   text-align: center;
@@ -760,15 +763,14 @@ textarea {
   text-decoration: underline;
 }
 .registration form {
-  margin: 20px 0;
-  text-align: center;
+  margin: 1.5rem 0;
 }
 .registration form p {
   margin-top: 0;
 }
 .registration form .errorlist {
   color: #f00;
-  margin: 20px 0 5px;
+  margin: 1.5rem 0 0.5rem;
 }
 .registration form .helptext {
   display: block;
@@ -781,17 +783,17 @@ textarea {
 }
 .registration form label {
   display: block;
-  margin: 5px 0;
+  margin: 0.7rem 0;
   color: #333;
 }
 .registration form input {
   display: block;
-  width: 100%;
+  width: calc(100% + 3rem);
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   padding: 0 1.5rem;
-  margin: 0.5rem 0;
+  margin: 0.5rem -1.5rem;
   height: 3rem;
   line-height: 3rem;
   -webkit-border-radius: 1.5rem;
@@ -802,7 +804,7 @@ textarea {
   outline: none;
 }
 .registration form input[type=submit] {
-  margin: 2rem 0;
+  margin: 2rem -1.5rem;
   font-size: 1.3rem;
   color: #fff;
   background-color: #00a0f0;
