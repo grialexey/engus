@@ -61,7 +61,7 @@ class DeckAdmin(admin.ModelAdmin):
 
 class CardLearnerAdmin(admin.ModelAdmin):
     list_display = ('card', 'learner', 'level', 'next_repeat', 'created', )
-    raw_id_fields = ('learner', )
+    raw_id_fields = ('card', 'learner', )
     ordering = ('-created', )
 
 

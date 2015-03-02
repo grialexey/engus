@@ -63,7 +63,7 @@ class Card(models.Model):
         ordering = ['weight', 'created', 'pk', ]
 
     def __unicode__(self):
-        return u'#%d. %s – %s' % (self.pk, self.front, self.back)
+        return u'%s – %s. Deck: %s' % (self.front, self.back, self.deck)
 
 
 class CardLearnerQuerySet(models.QuerySet):
