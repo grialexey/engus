@@ -88,6 +88,7 @@ LOGIN_REDIRECT_URL = '/'
 
 SITE_ID = 1
 
+
 # Third-party apps settings
 
 # easy-thumbnails
