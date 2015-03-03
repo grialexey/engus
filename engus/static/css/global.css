@@ -426,7 +426,7 @@ textarea {
   font-weight: bold;
 }
 .deck-list__item-cards-count.m-repeat {
-  color: #555;
+  color: #f00;
 /*font-weight: bold;*/
 }
 .deck-study__header {
