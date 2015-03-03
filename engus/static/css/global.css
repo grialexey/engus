@@ -378,16 +378,15 @@ textarea {
   margin-bottom: 2.5rem;
 }
 .deck-list__unit-title-wrapper {
-  color: #555;
-  font-weight: bold;
-  font-size: 1.5rem;
+  color: #00a0f0;
+  font-size: 2rem;
   display: inline-block;
-  line-height: 2.4rem;
-  height: 3rem;
-  -webkit-border-radius: 1.5rem;
-  border-radius: 1.5rem;
+  line-height: 3rem;
+  height: 3.6rem;
+  -webkit-border-radius: 1.8rem;
+  border-radius: 1.8rem;
   padding: 0 1.5rem;
-  border: 0.3rem solid rgba(0,160,240,0.4);
+  border: 0.3rem solid rgba(0,160,240,0.3);
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
