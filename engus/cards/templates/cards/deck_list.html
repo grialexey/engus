@@ -5,26 +5,29 @@
 {% block header_menu_item_decks_class %}active{% endblock %}
 
 {% block content %}
-    <ul class="deck-list">
-        {% load thumbnail %}
-        {% for deck in deck_list %}<li class="deck-list__item">
-            <a class="deck-list__item-link" href="{{ deck.get_study_url }}">
-                <div class="deck-list__item-image-wrapper">
-                    {% if deck.image %}
-                        {% thumbnail deck.image 200x200  quality=80  as thumb %}
-                        <img class="deck-list__item-image" src="{{ thumb.url }}" width="{{ thumb.width }}" height="{{ thumb.height }}">
-                    {% else %}
-                        <img class="deck-list__item-image" src="{{ STATIC_URL }}images/flat-circle.jpg">
-                    {% endif %}
-                </div>
+    <section class="deck-list">
+        <h2 class="deck-list__unit-title">Основы</h2>
+        <ul class="deck-list__list">
+            {% load thumbnail %}
+            {% for deck in deck_list %}<li class="deck-list__item">
+                <a class="deck-list__item-link" href="{{ deck.get_study_url }}">
+                    <div class="deck-list__item-image-wrapper">
+                        {% if deck.image %}
+                            {% thumbnail deck.image 200x200  quality=80  as thumb %}
+                            <img class="deck-list__item-image" src="{{ thumb.url }}" width="{{ thumb.width }}" height="{{ thumb.height }}">
+                        {% else %}
+                            <img class="deck-list__item-image" src="{{ STATIC_URL }}images/flat-circle.jpg">
+                        {% endif %}
+                    </div>
 
-                <h2 class="deck-list__item-title">{{ deck.name }}</h2>
-                {% with deck_cards_count=deck.card__count %}
-                <div class="deck-list__item-cards-count {% if deck.card_learners.exists %}{% if deck.learned_cards_count == deck_cards_count %}m-done{% else %}m-repeat{% endif %}{% endif %}">
-                    {{ deck.learned_cards_count }} / {{ deck_cards_count }}
-                </div>
-                {% endwith %}
-            </a>
-        </li>{% endfor %}
-    </ul>
+                    <h2 class="deck-list__item-title">{{ deck.name }}</h2>
+                    {% with deck_cards_count=deck.card__count %}
+                    <div class="deck-list__item-cards-count {% if deck.card_learners.exists %}{% if deck.learned_cards_count == deck_cards_count %}m-done{% else %}m-repeat{% endif %}{% endif %}">
+                        {{ deck.learned_cards_count }} / {{ deck_cards_count }}
+                    </div>
+                    {% endwith %}
+                </a>
+            </li>{% endfor %}
+        </ul>
+    </section>
 {% endblock %}

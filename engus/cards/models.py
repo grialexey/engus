@@ -33,7 +33,7 @@ class Deck(models.Model):
     class Meta:
         verbose_name = 'Deck'
         verbose_name_plural = 'Decks'
-        ordering = ['-unit__weight', '-weight', '-created', ]
+        ordering = ['unit__weight', 'weight', 'created', ]
 
     def __unicode__(self):
         if self.user:
