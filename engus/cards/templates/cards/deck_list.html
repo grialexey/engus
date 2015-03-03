@@ -6,7 +6,9 @@
 
 {% block content %}
     <section class="deck-list">
-        <h2 class="deck-list__unit-title">Основы</h2>
+        <h2 class="deck-list__unit-title">
+            <span class="deck-list__unit-title-wrapper">Основы</span>
+        </h2>
         <ul class="deck-list__list">
             {% load thumbnail %}
             {% for deck in deck_list %}<li class="deck-list__item">
