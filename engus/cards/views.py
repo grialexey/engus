@@ -4,6 +4,7 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.views.generic.detail import DetailView
+from django.db.models import Count, Prefetch
 from braces.views import LoginRequiredMixin
 from .models import Card, Deck, CardLearner
 from .forms import CardLearnerConfidenceForm
@@ -11,7 +12,7 @@ from .forms import CardLearnerConfidenceForm
 
 def home_view(request):
     if request.user.is_authenticated():
-        decks = Deck.objects.filter(Q(user=request.user) | Q(user__isnull=True)).select_related('card_set')
+        decks = Deck.objects.filter(Q(user=request.user) | Q(user__isnull=True)).annotate(Count('card'))
         for deck in decks:
             deck.card_learners = CardLearner.objects.filter(card__deck=deck, learner=request.user)
             deck.learned_cards_count = deck.card_learners.learned().count()

@@ -19,7 +19,7 @@
                 </div>
 
                 <h2 class="deck-list__item-title">{{ deck.name }}</h2>
-                {% with deck_cards_count=deck.card_set.count %}
+                {% with deck_cards_count=deck.card__count %}
                 <div class="deck-list__item-cards-count {% if deck.card_learners.exists %}{% if deck.learned_cards_count == deck_cards_count %}m-done{% else %}m-repeat{% endif %}{% endif %}">
                     {{ deck.learned_cards_count }} / {{ deck_cards_count }}
                 </div>
