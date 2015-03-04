@@ -790,9 +790,12 @@ textarea {
   line-height: 1.4;
 }
 .home__title {
-  font-size: 1.4rem;
+  font-size: 1.9rem;
+  color: #00a0f0;
   margin-bottom: 1.2rem;
   font-weight: bold;
+  font-family: 'Philosopher', Helvetica, sans-serif;
+  line-height: 1;
 }
 .home p {
   margin: 0.8rem 0;
