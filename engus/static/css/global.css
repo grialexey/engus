@@ -702,7 +702,7 @@ textarea {
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
   width: 100%;
-  padding: 0.7rem 0;
+  padding: 0.5rem 0;
   position: relative;
   color: #fff;
 }
@@ -714,7 +714,7 @@ textarea {
   -webkit-flex: 0 0 auto;
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
-  margin-right: 1rem;
+  margin: 0.2rem 0.7rem 0.2rem 0;
   position: relative;
 }
 .header__menu-item:last-child {
@@ -734,6 +734,14 @@ textarea {
   line-height: 2.5rem;
   height: 2.5rem;
   padding: 0;
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -o-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  text-align: center;
 }
 .header__menu-link {
   display: block;
