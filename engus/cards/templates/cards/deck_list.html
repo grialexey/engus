@@ -2,34 +2,57 @@
 
 {% load pytils_numeral %}
 
-{% block header_menu_item_decks_class %}active{% endblock %}
+{% block header_menu_item_deck_list_class %}m-active{% endblock %}
 
 {% block content %}
     <section class="deck-list">
-        <h2 class="deck-list__unit-title">
-            <span class="deck-list__unit-title-wrapper">Основы</span>
-        </h2>
-        <ul class="deck-list__list">
-            {% load thumbnail %}
-            {% for deck in deck_list %}<li class="deck-list__item">
-                <a class="deck-list__item-link" href="{{ deck.get_study_url }}">
-                    <div class="deck-list__item-image-wrapper">
-                        {% if deck.image %}
-                            {% thumbnail deck.image 200x200  quality=80  as thumb %}
-                            <img class="deck-list__item-image" src="{{ thumb.url }}" width="{{ thumb.width }}" height="{{ thumb.height }}">
-                        {% else %}
-                            <img class="deck-list__item-image" src="{{ STATIC_URL }}images/flat-circle.jpg">
-                        {% endif %}
-                    </div>
+        {% load thumbnail %}
+        {% for deck in deck_list %}
+            {% ifchanged deck.unit_name %}
+                <h2 class="deck-list__unit-title">
+                    <span class="deck-list__unit-title-wrapper">{{ deck.unit_name }}</span>
+                </h2>
+            {% endifchanged %}
+            <div class="deck-list__item {% if cards_learned_count < deck.weight %}m-inactive{% endif %}">
+                {% if cards_learned_count >= deck.weight %}
+                    <a class="deck-list__item-link" href="{{ deck.get_study_url }}">
+                {% endif %}
 
-                    <h2 class="deck-list__item-title">{{ deck.name }}</h2>
-                    {% with deck_cards_count=deck.card__count %}
-                    <div class="deck-list__item-cards-count {% if deck.card_learners.exists %}{% if deck.learned_cards_count == deck_cards_count %}m-done{% else %}m-repeat{% endif %}{% endif %}">
-                        {{ deck.learned_cards_count }} / {{ deck_cards_count }}
-                    </div>
-                    {% endwith %}
-                </a>
-            </li>{% endfor %}
-        </ul>
+                        <div class="deck-list__item-image-wrapper">
+                            {% if deck.image %}
+                                {% thumbnail deck.image 200x200  quality=80  as thumb %}
+                                <img class="deck-list__item-image" src="{{ thumb.url }}" width="{{ thumb.width }}" height="{{ thumb.height }}">
+                            {% else %}
+                                <img class="deck-list__item-image" src="{{ STATIC_URL }}images/flat-circle.jpg">
+                            {% endif %}
+                        </div>
+
+                        <h2 class="deck-list__item-title">
+                            {{ deck.name }}
+                        </h2>
+
+                        {% with deck_cards_count=deck.card__count %}
+
+                        {% if cards_learned_count < deck.weight %}
+                            <span class="deck-list__item-cards-count">{{ deck_cards_count }}</span>
+                        {% else %}
+                            {% with learned_cards=deck.learned_cards.count %}
+                            <span class="deck-list__item-cards-count {% if deck.card_learners.exists %}{% if learned_cards == deck_cards_count %}m-done{% else %}m-repeat{% endif %}{% endif %}">
+                                {% if learned_cards != deck_cards_count %}{{ learned_cards }} / {% endif %}{{ deck_cards_count }}
+                            </span>
+                            {% endwith %}
+                        {% endif %}
+
+                        {% if cards_learned_count < deck.weight %}
+                            <div class="deck-list__item-access">{{ deck.weight }}</div>
+                        {% endif %}
+
+                        {% endwith %}
+
+                {% if cards_learned_count >= deck.weight %}
+                    </a>
+                {% endif %}
+            </div>
+        {% endfor %}
     </section>
 {% endblock %}

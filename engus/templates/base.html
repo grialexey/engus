@@ -27,13 +27,16 @@
         <div class="header__wrapper">
             <ul class="header__menu">
                 <li class="header__menu-item"><a href="/" class="header__menu-link header__menu-link--logo">Ингус</a></li>
-                <li class="header__menu-item header__menu-slogan">Изучение английского</li>
-                <li class="header__menu-item header__menu-item--fill"></li>
+                <li class="header__menu-item">
+                    <a href="{% url 'cards:deck-list' %}" class="header__menu-link {% block header_menu_item_deck_list_class %}{% endblock %}">Курс английского</a>
+                </li>
                 {% if user.is_authenticated %}
+                    <li class="header__menu-item header__menu-item--level">Уровень <span class="header__level">{{ cards_learned_count }}</span></li>
                     <li class="header__menu-item">
                         <a href="{% url 'logout' %}" class="header__menu-link {% block header_menu_item_profile_class %}{% endblock %}">Выйти</a>
                     </li>
                 {% else %}
+                    <li class="header__menu-item header__menu-item--fill"></li>
                     <li class="header__menu-item"><a href="{% url "login" %}" class="header__menu-link {% block header_menu_item_login_class %}{% endblock %}">Войти</a></li>
                 {% endif %}
             </ul>

@@ -373,41 +373,61 @@ textarea {
   margin-top: 25px;
   margin-bottom: 35px;
 }
+.deck-list {
+  margin-top: 1.5rem;
+  text-align: center;
+}
 .deck-list__unit-title {
   text-align: center;
+  margin-top: 2rem;
   margin-bottom: 2.5rem;
 }
 .deck-list__unit-title-wrapper {
   color: #00a0f0;
-  font-size: 2rem;
+  font-size: 1.8rem;
   display: inline-block;
   line-height: 3rem;
-  height: 3.6rem;
-  -webkit-border-radius: 1.8rem;
-  border-radius: 1.8rem;
+  height: 3.4rem;
+  -webkit-border-radius: 1.7rem;
+  border-radius: 1.7rem;
   padding: 0 1.5rem;
-  border: 0.3rem solid rgba(0,160,240,0.3);
+  border: 0.2rem solid rgba(0,160,240,0.3);
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-}
-.deck-list__list {
-  text-align: center;
 }
 .deck-list__item {
   width: 150px;
   display: inline-block;
   vertical-align: top;
   margin: 0 0.7rem 3rem;
+  text-align: center;
+}
+.deck-list__item.m-inactive .deck-list__item-title {
+  color: #aaa;
+}
+.deck-list__item.m-inactive .deck-list__item-image {
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+  opacity: 0.7;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+  filter: alpha(opacity=70);
+}
+.deck-list__item-access {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  -webkit-border-radius: 0.7rem;
+  border-radius: 0.7rem;
+  color: #fff;
+/*font-weight: bold;*/
+  padding-left: 1.5rem;
+  line-height: 1rem;
+  margin-top: 0.1rem;
+  background: #aaa url("../images/lock-white.png") no-repeat 0.5rem center;
 }
 .deck-list__item-link {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  color: #000;
   text-decoration: none;
   display: block;
-  text-align: center;
 }
 .deck-list__item-link:hover .deck-list__item-image {
   opacity: 0.7;
@@ -417,7 +437,6 @@ textarea {
 .deck-list__item-title {
   font-size: 1rem;
   line-height: 1.2;
-  color: #0096f0;
   color: #333;
 }
 .deck-list__item-image-wrapper {
@@ -427,6 +446,7 @@ textarea {
   position: relative;
   display: block;
   margin-bottom: 0.7rem;
+  text-align: center;
 }
 .deck-list__item-image {
   height: auto;
@@ -434,9 +454,12 @@ textarea {
   display: block;
 }
 .deck-list__item-cards-count {
-  color: #bbb;
-  font-size: 0.85rem;
   margin-top: 0.1rem;
+  color: #aaa;
+  font-size: 0.85rem;
+  line-height: 1rem;
+  white-space: nowrap;
+  display: block;
 }
 .deck-list__item-cards-count.m-done {
   color: #080;
@@ -444,7 +467,6 @@ textarea {
 }
 .deck-list__item-cards-count.m-repeat {
   color: #f00;
-/*font-weight: bold;*/
 }
 .deck-study__header {
   margin-bottom: 1rem;
@@ -650,6 +672,10 @@ textarea {
   padding: 0 15px;
   position: relative;
 }
+.header__level {
+  font-weight: bold;
+  margin-left: 0.2rem;
+}
 .header__menu {
   display: -webkit-box;
   display: -moz-box;
@@ -688,7 +714,7 @@ textarea {
   -webkit-flex: 0 0 auto;
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
-  margin-right: 0.5rem;
+  margin-right: 1rem;
   position: relative;
 }
 .header__menu-item:last-child {
@@ -704,27 +730,19 @@ textarea {
   flex: 1 1 auto;
   margin: 0;
 }
-.header__menu-slogan {
+.header__menu-item--level {
   line-height: 2.5rem;
   height: 2.5rem;
-  -webkit-border-radius: 1.25rem;
-  border-radius: 1.25rem;
-  padding: 0 1rem;
-  font-size: 1.1rem;
-}
-@media (max-width: 500px) {
-  .header__menu-slogan {
-    display: none;
-  }
+  padding: 0;
 }
 .header__menu-link {
   display: block;
-  font-size: 1.1rem;
+  font-size: 1rem;
   line-height: 2.5rem;
   height: 2.5rem;
   -webkit-border-radius: 1.25rem;
   border-radius: 1.25rem;
-  padding: 0 1.3rem;
+  padding: 0 1.1rem;
   text-decoration: none;
   color: #fff;
   -webkit-transition: background-color 0.1s, opacity 0.1s;
@@ -734,19 +752,37 @@ textarea {
   transition: background-color 0.1s, opacity 0.1s;
   cursor: pointer;
   background-color: rgba(0,0,0,0.1);
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
-.header__menu-link:hover:not(.active):not(.loading):not(.header__menu-link--logo) {
-  background-color: rgba(0,0,0,0.2);
+.header__menu-link:hover:not(.m-active):not(.loading):not(.header__menu-link--logo) {
+  background-color: rgba(255,255,255,0.3);
 }
-.header__menu-link.active {
-  background-color: #fff;
-  color: #00a0f0;
+.header__menu-link.m-active {
+  background-color: rgba(255,255,255,0.3);
 }
 .header__menu-link--logo {
   font-size: 1.5rem;
+  padding: 0 1.3rem;
   text-decoration: none;
   color: #00a0f0;
   background-color: #fff;
+}
+.home {
+  margin: 2rem 0;
+  line-height: 1.4;
+}
+.home__title {
+  font-size: 1.4rem;
+  margin-bottom: 1.2rem;
+  font-weight: bold;
+}
+.home p {
+  margin: 0.8rem 0;
+}
+.home strong {
+  font-weight: bold;
 }
 .page {
   line-height: 1.3;

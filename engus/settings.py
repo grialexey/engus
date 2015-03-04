@@ -17,7 +17,7 @@ INSTALLED_APPS = (
     # Third-party apps, patches, fixes
     'easy_thumbnails',
     #'rest_framework',
-    # 'debug_toolbar',
+    'debug_toolbar',
     'pytils',
 
     # Local apps, referenced via engus.appname
@@ -45,6 +45,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.tz',
     'django.core.context_processors.request',
     'django.contrib.messages.context_processors.messages',
+    'engus.cards.context_processors.cards_learned_count',
 )
 
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]

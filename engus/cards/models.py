@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import datetime
-from functools import partial
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.contrib.auth.models import User
@@ -8,32 +7,18 @@ from django.utils import timezone
 from engus.utils.models import make_filepath
 
 
-class Unit(models.Model):
-    name = models.CharField(max_length=255)
-    weight = models.BooleanField(default=0)
-    created = models.DateTimeField(auto_now_add=True)
-
-    class Meta:
-        verbose_name = 'Unit'
-        verbose_name_plural = 'Units'
-        ordering = ['-weight', '-created', ]
-
-    def __unicode__(self):
-        return self.name
-
-
 class Deck(models.Model):
     name = models.CharField(max_length=255)
     user = models.ForeignKey(User, null=True, blank=True)
-    image = models.ImageField(upload_to='deck_image/%Y_%m_%d', blank=True)
-    unit = models.ForeignKey(Unit, null=True, blank=True)
-    weight = models.PositiveIntegerField(default=0)
+    image = models.ImageField(blank=True, upload_to=make_filepath)
+    unit_name = models.CharField(max_length=255)
+    weight = models.IntegerField(default=0)
     created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         verbose_name = 'Deck'
         verbose_name_plural = 'Decks'
-        ordering = ['unit__weight', 'weight', 'created', ]
+        ordering = ['weight', 'created', ]
 
     def __unicode__(self):
         if self.user:
@@ -46,17 +31,20 @@ class Deck(models.Model):
     def get_absolute_url(self):
         return reverse('cards:deck-detail', kwargs={'pk': self.pk, })
 
+    def has_access_to_study(self, user):
+        return user.cardlearner_set.learned().count() >= self.weight
+
 
 class Card(models.Model):
     front = models.TextField(blank=True)
     front_highlighted_text = models.CharField(max_length=255, blank=True)
     front_audio = models.FileField(blank=True, upload_to='card_audio/%Y_%m_%d')
-    front_image = models.ImageField(blank=True, upload_to=partial(make_filepath, 'image'))
+    front_image = models.ImageField(blank=True, upload_to=make_filepath)
     front_comment = models.TextField(blank=True)
     back = models.TextField()
     back_highlighted_text = models.CharField(max_length=255, blank=True)
     back_audio = models.FileField(blank=True, upload_to='card_audio/%Y_%m_%d')
-    back_image = models.ImageField(blank=True, upload_to=partial(make_filepath, 'image'))
+    back_image = models.ImageField(blank=True, upload_to=make_filepath)
     back_comment = models.TextField(blank=True)
     deck = models.ForeignKey(Deck)
     weight = models.IntegerField(default=0)

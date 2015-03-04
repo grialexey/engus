@@ -54,9 +54,18 @@ class CardInline(admin.TabularInline):
 
 class DeckAdmin(admin.ModelAdmin):
     inlines = [CardInline, ]
-    list_display = ('name', 'user', 'weight', 'created', )
+    list_display = ('name', 'user', 'unit_name', 'previous_decks_cards_count', 'weight', 'created', )
     list_editable = ('weight', )
-    raw_id_fields = ('user', 'unit', )
+    raw_id_fields = ('user', )
+
+    def previous_decks_cards_count(self, obj):
+        cards_count = 0
+        if obj.user is None:
+            decks = Deck.objects.filter(weight__lt=obj.weight, user__isnull=True)
+            cards_count = Card.objects.filter(deck__in=decks).count()
+        return cards_count
+
+    readonly_fields = ('previous_decks_cards_count', )
 
 
 class CardLearnerAdmin(admin.ModelAdmin):
