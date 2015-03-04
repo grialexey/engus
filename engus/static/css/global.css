@@ -781,16 +781,19 @@ textarea {
 /*text-decoration: none;*/
 /*color: mainColor(1);*/
   background-color: transparent;
-  border: 0.2rem solid #fff;
+  border: 0.2rem solid rgba(255,255,255,0.7);
   line-height: 2.1rem;
   height: 2.1rem;
+}
+.header__menu-link--logo:hover {
+  border-color: #fff;
 }
 .home {
   margin: 2rem 0 7rem;
   line-height: 1.4;
 }
 .home__title {
-  font-size: 1.9rem;
+  font-size: 1.8rem;
   color: #00a0f0;
   margin-bottom: 1.2rem;
   font-weight: bold;
