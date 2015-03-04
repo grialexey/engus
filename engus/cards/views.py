@@ -26,10 +26,8 @@ class DeckListView(LoginRequiredMixin, ListView):
         card_learners_decks_list = card_learners.values_list('card__deck', flat=True)
         learned_card_learners_decks_list = card_learners.learned().values_list('card__deck', flat=True)
         for deck in self.object_list:
-            # deck.card_learners = len([i for i in card_learners_decks_list if i == deck.pk])
-            # deck.learned_cards = len([i for i in learned_card_learners_decks_list if i == deck.pk])
-            deck.card_learners = CardLearner.objects.filter(card__deck=deck, learner=self.request.user)
-            deck.learned_cards = deck.card_learners.learned()
+            deck.card_learners_count = len([i for i in card_learners_decks_list if i == deck.pk])
+            deck.learned_cards_count = len([i for i in learned_card_learners_decks_list if i == deck.pk])
         return context
 
 

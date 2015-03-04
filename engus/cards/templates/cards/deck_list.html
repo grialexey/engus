@@ -13,8 +13,8 @@
                     <span class="deck-list__unit-title-wrapper">{{ deck.unit_name }}</span>
                 </h2>
             {% endifchanged %}
-            <div class="deck-list__item {% if cards_learned_count < deck.weight %}m-inactive{% endif %}">
-                {% if cards_learned_count >= deck.weight %}
+            <div class="deck-list__item {% if user_level < deck.weight %}m-inactive{% endif %}">
+                {% if user_level >= deck.weight %}
                     <a class="deck-list__item-link" href="{{ deck.get_study_url }}">
                 {% endif %}
 
@@ -33,23 +33,21 @@
 
                         {% with deck_cards_count=deck.card__count %}
 
-                        {% if cards_learned_count < deck.weight %}
-                            <span class="deck-list__item-cards-count">{{ deck_cards_count }}</span>
-                        {% else %}
-                            {% with learned_cards=deck.learned_cards.count %}
-                            <span class="deck-list__item-cards-count {% if deck.card_learners.exists %}{% if learned_cards == deck_cards_count %}m-done{% else %}m-repeat{% endif %}{% endif %}">
-                                {% if learned_cards != deck_cards_count %}{{ learned_cards }} / {% endif %}{{ deck_cards_count }}
+{#                        {% if user_level < deck.weight %}#}
+{#                            <span class="deck-list__item-cards-count">{{ deck_cards_count }}</span>#}
+{#                        {% else %}#}
+                            <span class="deck-list__item-cards-count {% if deck.card_learners_count > 0 %}{% if deck.learned_cards_count == deck_cards_count %}m-done{% else %}m-repeat{% endif %}{% endif %}">
+                                {% if deck.card_learners_count > 0 %}{{ deck.learned_cards_count }} / {% endif %}{{ deck_cards_count }}
                             </span>
-                            {% endwith %}
-                        {% endif %}
+{#                        {% endif %}#}
 
-                        {% if cards_learned_count < deck.weight %}
+                        {% if user_level < deck.weight %}
                             <div class="deck-list__item-access">{{ deck.weight }}</div>
                         {% endif %}
 
                         {% endwith %}
 
-                {% if cards_learned_count >= deck.weight %}
+                {% if user_level >= deck.weight %}
                     </a>
                 {% endif %}
             </div>

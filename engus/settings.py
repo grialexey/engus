@@ -45,7 +45,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.tz',
     'django.core.context_processors.request',
     'django.contrib.messages.context_processors.messages',
-    'engus.cards.context_processors.cards_learned_count',
+    'engus.cards.context_processors.user_level',
 )
 
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]

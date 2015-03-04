@@ -31,7 +31,7 @@
                     <a href="{% url 'cards:deck-list' %}" class="header__menu-link {% block header_menu_item_deck_list_class %}{% endblock %}">Курс английского</a>
                 </li>
                 {% if user.is_authenticated %}
-                    <li class="header__menu-item header__menu-item--level">Уровень <span class="header__level">{{ cards_learned_count }}</span></li>
+                    <li class="header__menu-item header__menu-item--level">Уровень <span class="header__level">{{ user_level }}</span></li>
                     <li class="header__menu-item">
                         <a href="{% url 'logout' %}" class="header__menu-link {% block header_menu_item_profile_class %}{% endblock %}">Выйти</a>
                     </li>
