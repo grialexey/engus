@@ -765,10 +765,11 @@ textarea {
   box-sizing: border-box;
 }
 .header__menu-link:hover:not(.m-active):not(.loading):not(.header__menu-link--logo) {
-  background-color: rgba(255,255,255,0.3);
+  background-color: rgba(0,0,0,0.2);
 }
 .header__menu-link.m-active {
-  background-color: rgba(255,255,255,0.3);
+  color: #00a0f0;
+  background-color: #fff;
 }
 .header__menu-link--logo {
   font-size: 1.5rem;
