@@ -695,6 +695,12 @@ textarea {
   -ms-flex-pack: justify;
   -webkit-justify-content: space-between;
   justify-content: space-between;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -o-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
   -webkit-box-lines: multiple;
   -moz-box-lines: multiple;
   -o-box-lines: multiple;
@@ -750,6 +756,7 @@ textarea {
   height: 2.5rem;
   -webkit-border-radius: 1.25rem;
   border-radius: 1.25rem;
+  border: none;
   padding: 0 1.1rem;
   text-decoration: none;
   color: #fff;
@@ -760,7 +767,6 @@ textarea {
   transition: background-color 0.1s, opacity 0.1s;
   cursor: pointer;
   background-color: rgba(0,0,0,0.1);
-/*box-sizing: border-box;*/
 }
 .header__menu-link:hover:not(.m-active):not(.header__menu-link--logo) {
   background-color: rgba(0,0,0,0.2);
@@ -780,7 +786,7 @@ textarea {
   height: 2.1rem;
 }
 .home {
-  margin: 2rem 0;
+  margin: 2rem 0 7rem;
   line-height: 1.4;
 }
 .home__title {
@@ -790,6 +796,12 @@ textarea {
 }
 .home p {
   margin: 0.8rem 0;
+}
+.home img {
+  display: block;
+  margin: 1.2rem auto 3rem;
+  max-width: 100%;
+  height: auto;
 }
 .home strong {
   font-weight: bold;
