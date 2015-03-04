@@ -33,13 +33,9 @@
 
                         {% with deck_cards_count=deck.card__count %}
 
-{#                        {% if user_level < deck.weight %}#}
-{#                            <span class="deck-list__item-cards-count">{{ deck_cards_count }}</span>#}
-{#                        {% else %}#}
-                            <span class="deck-list__item-cards-count {% if deck.card_learners_count > 0 %}{% if deck.learned_cards_count == deck_cards_count %}m-done{% else %}m-repeat{% endif %}{% endif %}">
-                                {% if deck.card_learners_count > 0 %}{{ deck.learned_cards_count }} / {% endif %}{{ deck_cards_count }}
-                            </span>
-{#                        {% endif %}#}
+                        <span class="deck-list__item-cards-count {% if deck.card_learners_count > 0 and  user_level >= deck.weight %}{% if deck.learned_cards_count == deck_cards_count %}m-done{% else %}m-repeat{% endif %}{% endif %}">
+                            {% if deck.card_learners_count > 0 and deck.learned_cards_count != deck_cards_count %}{{ deck.learned_cards_count }} / {% endif %}{{ deck_cards_count }}
+                        </span>
 
                         {% if user_level < deck.weight %}
                             <div class="deck-list__item-access">{{ deck.weight }}</div>
