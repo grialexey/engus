@@ -23,9 +23,11 @@ class DeckListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super(DeckListView, self).get_context_data(**kwargs)
         card_learners = CardLearner.objects.filter(learner=self.request.user).select_related('card')
-        context['card_learners_decks'] = card_learners.values_list('card__deck', flat=True)
-        context['learned_card_learners_decks'] = card_learners.learned().values_list('card__deck', flat=True)
+        card_learners_decks_list = card_learners.values_list('card__deck', flat=True)
+        learned_card_learners_decks_list = card_learners.learned().values_list('card__deck', flat=True)
         for deck in self.object_list:
+            # deck.card_learners = len([i for i in card_learners_decks_list if i == deck.pk])
+            # deck.learned_cards = len([i for i in learned_card_learners_decks_list if i == deck.pk])
             deck.card_learners = CardLearner.objects.filter(card__deck=deck, learner=self.request.user)
             deck.learned_cards = deck.card_learners.learned()
         return context
