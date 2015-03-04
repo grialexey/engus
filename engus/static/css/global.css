@@ -760,11 +760,9 @@ textarea {
   transition: background-color 0.1s, opacity 0.1s;
   cursor: pointer;
   background-color: rgba(0,0,0,0.1);
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
+/*box-sizing: border-box;*/
 }
-.header__menu-link:hover:not(.m-active):not(.loading):not(.header__menu-link--logo) {
+.header__menu-link:hover:not(.m-active):not(.header__menu-link--logo) {
   background-color: rgba(0,0,0,0.2);
 }
 .header__menu-link.m-active {
@@ -774,9 +772,12 @@ textarea {
 .header__menu-link--logo {
   font-size: 1.5rem;
   padding: 0 1.3rem;
-  text-decoration: none;
-  color: #00a0f0;
-  background-color: #fff;
+/*text-decoration: none;*/
+/*color: mainColor(1);*/
+  background-color: transparent;
+  border: 0.2rem solid #fff;
+  line-height: 2.1rem;
+  height: 2.1rem;
 }
 .home {
   margin: 2rem 0;
