@@ -751,21 +751,25 @@ textarea {
 .header__menu-link:hover:not(.m-active):not(.header__menu-link--logo) {
   background-color: rgba(0,0,0,0.2);
 }
-.header__menu-link.m-active {
+.header__menu-link.m-active:not(.header__menu-link--logo) {
   color: #00a0f0;
   background-color: #fff;
 }
 .header__menu-link--logo {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   padding: 0 1.3rem;
-/*text-decoration: none;*/
-/*color: mainColor(1);*/
   background-color: transparent;
-  border: 0.2rem solid rgba(255,255,255,0.7);
+  border: 0.2rem solid rgba(255,255,255,0.5);
   line-height: 2.1rem;
   height: 2.1rem;
+  -webkit-transition: border-color 0.1s;
+  -moz-transition: border-color 0.1s;
+  -o-transition: border-color 0.1s;
+  -ms-transition: border-color 0.1s;
+  transition: border-color 0.1s;
 }
-.header__menu-link--logo:hover {
+.header__menu-link--logo:hover,
+.header__menu-link--logo.m-active {
   border-color: #fff;
 }
 .home {

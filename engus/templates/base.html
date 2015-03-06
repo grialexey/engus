@@ -26,7 +26,7 @@
     <header class="header">
         <div class="header__wrapper">
             <ul class="header__menu">
-                <li class="header__menu-item"><a href="/" class="header__menu-link header__menu-link--logo">Ингус</a></li>
+                <li class="header__menu-item"><a href="/" class="header__menu-link header__menu-link--logo {% block header_menu_item_home_class %}{% endblock %}">Ингус</a></li>
                 <li class="header__menu-item">
                     <a href="{% url 'cards:deck-list' %}" class="header__menu-link {% block header_menu_item_deck_list_class %}{% endblock %}">Курс английского</a>
                 </li>
