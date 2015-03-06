@@ -85,7 +85,7 @@ STATIC_URL = '/static/'
 
 SESSION_ENGINE = "django.contrib.sessions.backends.cached_db"
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/decks/'
 
 SITE_ID = 1
 

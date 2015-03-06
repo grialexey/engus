@@ -8,7 +8,7 @@ admin.site.site_header = 'Engus administration'
 
 urlpatterns = patterns('',
     url(r'^$', 'engus.cards.views.home_view'),
-    url(r'^cards/', include('engus.cards.urls', namespace='cards')),
+    url(r'^', include('engus.cards.urls', namespace='cards')),
     url(r'^accounts/', include('engus.accounts.urls', namespace='accounts')),
     url(r'^accounts/', include('django.contrib.auth.urls')),
     url(r'^engusadmin/', include(admin.site.urls)),
