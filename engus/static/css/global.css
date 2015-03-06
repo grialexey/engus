@@ -400,10 +400,9 @@ textarea {
   -webkit-border-radius: 0.7rem;
   border-radius: 0.7rem;
   color: #fff;
-/*font-weight: bold;*/
   padding-left: 1.5rem;
   line-height: 1rem;
-  margin-top: 0.1rem;
+  margin-top: 0.3rem;
   background: #aaa url("../images/lock-white.png") no-repeat 0.5rem center;
 }
 .deck-list__item-link {
