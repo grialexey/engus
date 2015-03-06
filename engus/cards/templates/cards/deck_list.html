@@ -1,18 +1,13 @@
 {% extends "base.html" %}
 
 {% load pytils_numeral %}
+{% load thumbnail %}
 
 {% block header_menu_item_deck_list_class %}m-active{% endblock %}
 
 {% block content %}
     <section class="deck-list">
-        {% load thumbnail %}
         {% for deck in deck_list %}
-            {% ifchanged deck.unit_name %}
-                <h2 class="deck-list__unit-title">
-                    <span class="deck-list__unit-title-wrapper">{{ deck.unit_name }}</span>
-                </h2>
-            {% endifchanged %}
             <div class="deck-list__item {% if user_level < deck.weight %}m-inactive{% endif %}">
                 {% if user_level >= deck.weight %}
                     <a class="deck-list__item-link" href="{{ deck.get_study_url }}">
@@ -47,6 +42,8 @@
                     </a>
                 {% endif %}
             </div>
+            {% if forloop.counter == 2 or forloop.counter == 7 or forloop.counter == 12 or forloop.counter == 17 %}<div/>{% endif %}
+            {% if forloop.counter == 5 or forloop.counter == 10 or forloop.counter == 15 or forloop.counter == 20 %}<div/>{% endif %}
         {% endfor %}
     </section>
 {% endblock %}

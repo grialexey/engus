@@ -54,7 +54,7 @@ class CardInline(admin.TabularInline):
 
 class DeckAdmin(admin.ModelAdmin):
     inlines = [CardInline, ]
-    list_display = ('name', 'user', 'unit_name', 'previous_decks_cards_count', 'weight', 'created', )
+    list_display = ('name', 'user', 'previous_decks_cards_count', 'weight', 'created', )
     list_editable = ('weight', )
     raw_id_fields = ('user', )
 

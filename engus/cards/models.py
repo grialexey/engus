@@ -11,7 +11,6 @@ class Deck(models.Model):
     name = models.CharField(max_length=255)
     user = models.ForeignKey(User, null=True, blank=True)
     image = models.ImageField(blank=True, upload_to=make_filepath)
-    unit_name = models.CharField(max_length=255)
     weight = models.IntegerField(default=0)
     created = models.DateTimeField(auto_now_add=True)
 
