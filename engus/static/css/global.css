@@ -404,7 +404,7 @@ textarea {
   line-height: 1rem;
   margin-top: 0.3rem;
   font-size: 1rem;
-  background: #aaa url("../images/lock-white.png") no-repeat 0.5rem center;
+  background: #aaa url("../images-dist/lock-white.png") no-repeat 0.5rem center;
   font-weight: bold;
 }
 .deck-list__item-link {
@@ -775,13 +775,13 @@ textarea {
   border-color: #fff;
 }
 .home {
-  margin: 2.5rem 0 7rem;
+  margin: 2rem 0 7rem;
   line-height: 1.4;
 }
 .home__title {
   font-size: 1.7rem;
   color: #00a0f0;
-  margin-bottom: 3.5rem;
+  margin-bottom: 3rem;
   font-weight: bold;
   font-family: 'Philosopher', Helvetica, sans-serif;
   line-height: 1.1;
@@ -805,20 +805,22 @@ textarea {
 }
 .home__paragraph {
   margin: 0.8rem 0;
-  color: #555;
+  color: #777;
   font-size: 1rem;
   line-height: 1.5;
+  text-align: center;
 }
 .home h2 {
   font-size: 1.3rem;
   font-weight: bold;
-  color: #333;
-  margin: 2.5rem 0 0.8rem;
+  color: #000;
+  margin: 3rem 0 0.8rem;
   line-height: 1.1;
+  text-align: center;
 }
 .home img {
   display: block;
-  margin: 1.2rem auto 3rem;
+  margin: 0.5rem auto 3rem;
   max-width: 100%;
   height: auto;
 }
