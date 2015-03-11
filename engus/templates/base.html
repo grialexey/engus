@@ -4,19 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">      
     <title>{% block pagetitle %}{% if page_title %}{{ page_title }} | {% endif %}{% endblock %}Ингус – курс английского</title>
-    <link rel="shortcut icon" href="{{ STATIC_URL }}images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ STATIC_URL }}images-dist/favicon.ico" type="image/x-icon">
     <meta name="description" content="" />
     <meta name="keywords" content="" />
 
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/global.css"/>
-    {% block extrastyles %}{% endblock %}
-
     {% if debug %}
-        <script type="text/javascript" src="{{ STATIC_URL }}frontend/bower_components/jquery/dist/jquery.js"></script>
-        <script type="text/javascript" src="{{ STATIC_URL }}frontend/js/card.js"></script>
-        <script type="text/javascript" src="{{ STATIC_URL }}frontend/js/app.js"></script>
+        <script async src="{{ STATIC_URL }}frontend/bower_components/jquery/dist/jquery.js"></script>
+        <script async src="{{ STATIC_URL }}frontend/js/card.js"></script>
+        <script async src="{{ STATIC_URL }}frontend/js/app.js"></script>
     {% else %}
-        <script type="text/javascript" src="{{ STATIC_URL }}js/global.min.js"></script>
+        <script async src="{{ STATIC_URL }}js/global.min.js"></script>
     {% endif %}
     {% block extrascripts %}{% endblock %}
 
@@ -81,3 +78,6 @@
     {% endif %}
 </body>
 </html>
+
+<link rel="stylesheet" href="{{ STATIC_URL }}css/global.css"/>
+{% block extrastyles %}{% endblock %}
