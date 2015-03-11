@@ -37,7 +37,7 @@ server {
 
     location /static/ {
         alias {{ project_root }}/www/static/;  
-        expires 7d;
+        expires 1d;
         add_header Vary Accept-Encoding;
         access_log off;
     }
