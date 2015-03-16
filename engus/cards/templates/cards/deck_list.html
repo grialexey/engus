@@ -15,7 +15,7 @@
 
                         <div class="deck-list__item-image-wrapper">
                             {% if deck.image %}
-                                {% thumbnail deck.image 200x200  quality=80  as thumb %}
+                                {% thumbnail deck.image 200x200  quality=100  as thumb %}
                                 <img class="deck-list__item-image" src="{{ thumb.url }}" width="{{ thumb.width }}" height="{{ thumb.height }}">
                             {% else %}
                                 <img class="deck-list__item-image" src="{{ STATIC_URL }}images-dist/flat-circle.jpg">
